@@ -4,7 +4,7 @@ const meteorizacionMecanica = {
  "gelifraccion": "El agua penetra en las grietas. Al congelarse, aumenta de volumen y ejerce presión sobre sus paredes. Esa presión puede fragmentar la roca.",
  "descompresion": "Las rocas que se han formado en el interior de la corteza terrestre a altas presiones, cuando suben hacia la superficie soportan menos presión y pueden fragmentarse.",
  "abrasion": "Los clastos que transportan el viento, el agua o el hielo desgastan la roca por rozamiento.",
- "termoclastia": "En una roca expuesta al sol pueden producirse grandes diferencias de temperatura entre su superficie y su interior. Esto provoca dilataciones desiguales que pueden fracturar y fragmentar la roca."
+ "termoclastia": "En una roca que está expuesta al sol pueden producirse diferencias de temperatura entre su superficie y su interior. Esto provoca que se pueda fragmentar."
 };
 const raicesMeteorizacion = "Las raíces de los árboles ensanchan las grietas de forma parecida a la gelifracción.";
 
