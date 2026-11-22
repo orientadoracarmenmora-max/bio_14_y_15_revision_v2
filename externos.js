@@ -80,6 +80,11 @@ const rocasEvaporiticas = [
  "En las rocas de <strong>sales</strong> aparecen minerales como la <strong>halita</strong>, la silvina y la carnalita."
 ];
 
+const calicheYSueloRocoso = [
+ "<strong>Caliche.</strong> En un clima muy seco y caluroso, el agua sube por los poros del suelo (<strong>ascenso capilar</strong>). Al evaporarse, deja sales o cal que pueden formar una <strong>costra cerca de la superficie</strong>.",
+ "<strong>Suelo rocoso o litosuelo.</strong> Tiene <strong>poco espesor</strong> y los <strong>horizontes apenas se distinguen</strong>. Debajo está la roca madre, poco o nada alterada."
+];
+
 const externos = [
 {
  id:"meteorizacion", titulo:"Meteorización", paginas:"268–269", tema:14,
@@ -101,7 +106,7 @@ const externos = [
  ["Estructura del suelo",horizontesDelSuelo],
  ["Propiedades del suelo","La <strong>textura</strong> indica qué proporción de arena, limo y arcilla hay en la parte mineral del suelo. La arena tiene los granos más grandes. El limo tiene un tamaño intermedio y la arcilla, el más pequeño. Un suelo <strong>franco</strong> tiene una mezcla equilibrada de los tres. La <strong>porosidad</strong> es el porcentaje del suelo ocupado por huecos que pueden contener aire o agua. La <strong>permeabilidad</strong> es la facilidad con que el agua circula por esos huecos. Un suelo muy arcilloso puede retener mucha agua y, aun así, ser poco permeable porque el agua circula lentamente por sus poros pequeños."],
  ["Fertilidad del suelo","Un suelo es más <strong>fértil</strong> si favorece el crecimiento de las plantas. Ayudan la presencia de <strong>humus</strong> y de nutrientes disponibles, como nitratos y fosfatos. También influyen el agua disponible y la aireación del suelo."],
- ["Tipos de suelos","<strong>Podsol.</strong> En un clima húmedo y con poca evaporación, el agua se infiltra y desciende. El agua arrastra muchas sales del horizonte A. Esa capa queda pobre en sales y toma un color grisáceo. <strong>Suelo pardo.</strong> En la época lluviosa, el agua se infiltra en el suelo. En verano puede subir por los poros, por <strong>ascenso capilar</strong>. Por eso cuesta distinguir los horizontes A y B. <strong>Caliche.</strong> En un clima muy seco y caluroso, el agua sube por los poros del suelo. Este movimiento se llama <strong>ascenso capilar</strong>. Al evaporarse el agua, las sales o la cal pueden formar una costra cerca de la superficie. <strong>Litosuelo o suelo rocoso.</strong> Tiene poco espesor y sus horizontes apenas se distinguen. Se forma sobre roca madre poco o nada alterada."]
+ ["Tipos de suelos","<strong>Podsol.</strong> En un clima húmedo y con poca evaporación, el agua se infiltra y desciende. El agua arrastra muchas sales del horizonte A. Esa capa queda pobre en sales y toma un color grisáceo. <strong>Suelo pardo.</strong> En la época lluviosa, el agua se infiltra en el suelo. En verano puede subir por los poros, por <strong>ascenso capilar</strong>. Por eso cuesta distinguir los horizontes A y B.", [["caliche-litosuelo","Caliche y suelo rocoso · posible pregunta de examen",calicheYSueloRocoso]] ]
  ],
  esquema:["O · Mantillo","A · Lavado","B · Acumulación","C · Roca madre alterada"],
  ejemplo:"En una zona seca observas una costra de cal. La explicación compatible con el <strong>caliche</strong> es que el agua sube por capilaridad y la <strong>evaporación</strong> deja sales cerca de la superficie."

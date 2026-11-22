@@ -221,7 +221,10 @@ const studyQuestions = {
     ["En un perfil, ¿cómo distingues los horizontes O, A, B y C?",horizontesDelSuelo,true],
     ["Define la textura, la porosidad y la permeabilidad del suelo. ¿Puede un suelo arcilloso tener mucha porosidad y dejar pasar el agua lentamente?","La textura indica la proporción de arena, limo y arcilla de la fracción mineral del suelo. La porosidad indica qué porcentaje del suelo está ocupado por huecos que pueden contener aire o agua. La permeabilidad es la facilidad con la que el agua circula por el suelo. Sí: en un suelo muy arcilloso los poros son pequeños y pueden contener mucha agua, aunque esta circule despacio.",true],
     ["¿Qué factores favorecen que un suelo sea más fértil?","Un suelo es más fértil cuando favorece el crecimiento de las plantas. Ayudan la presencia de humus y de nutrientes disponibles, como nitratos y fosfatos, así como una buena disponibilidad de agua y una aireación adecuada.",true],
-    ["Un perfil tiene una costra de cal cerca de la superficie. El otro presenta una capa de suelo muy delgada sobre roca madre poco alterada. ¿Cuál es el caliche y cuál es el suelo rocoso? Justifica tu respuesta.","El primer perfil es un caliche. La pista es la costra de cal. En un clima árido, el agua asciende por capilaridad y, al evaporarse, deja cal o sales cerca de la superficie. El segundo perfil es un litosuelo o suelo rocoso. Las pistas son el poco espesor del suelo, la roca madre poco alterada y los horizontes poco diferenciados.",true]
+    ["¿En qué se diferencian el caliche y el suelo rocoso o litosuelo?",calicheYSueloRocoso,true],
+    ["Un perfil tiene una costra de cal cerca de la superficie. El otro presenta una capa de suelo muy delgada sobre roca madre poco alterada. ¿Cuál es el caliche y cuál es el suelo rocoso? Justifica tu respuesta.","El primer perfil es un caliche. La pista es la costra de cal. En un clima árido, el agua asciende por capilaridad y, al evaporarse, deja cal o sales cerca de la superficie. El segundo perfil es un litosuelo o suelo rocoso. Las pistas son el poco espesor del suelo, la roca madre poco alterada y los horizontes poco diferenciados.",true],
+    ["Ves una costra de cal cerca de la superficie en una zona muy seca. ¿Qué suelo es y cómo se forma?",[calicheYSueloRocoso[0]],true],
+    ["Ves una capa de suelo muy delgada sobre roca madre poco alterada. Apenas se distinguen los horizontes. ¿Qué suelo es?",[calicheYSueloRocoso[1]],true]
   ],
   sedimentos: [
     ["¿Qué es la meteorización? Explica en qué se diferencia de la erosión.","La meteorización altera los minerales o fragmenta la roca en superficie, en el mismo lugar donde se encuentra. Por ejemplo, cuando el agua se congela en una grieta y la ensancha, la roca se meteoriza. Si una corriente recoge después los clastos y los pone en movimiento, se produce erosión. Los fragmentos que permanecen acumulados donde se formaron constituyen el detrito."],
@@ -285,7 +288,7 @@ const figurePlacement = {
 };
 
 const questionPlacement = {
-  meteorizacion:[0], suelo:[0,0,0,1,2,3,4], sedimentos:[0,0,2,2,3,4],
+  meteorizacion:[0], suelo:[0,0,0,1,2,3,4,4,4,4], sedimentos:[0,0,2,2,3,4],
   magma:[0,0,0,1,2,2,3,4,6,6], igneas:[0,3,0,2,4,5,4,5,5],
   meta:[0,3,4,5,5,5], ciclo:[1,3,3], esfuerzos:[0,1,2]
 };
@@ -411,7 +414,7 @@ function studyPrompts(id,index) {
   let title = entries.length===1 ? "Pregunta de práctica" : "Preguntas de práctica";
   if (confirmed) title = "Serie regional · pregunta segura";
   if (id==="suelo" && index===1) title = "Horizontes del suelo · posible pregunta con dibujo";
-  if (id==="suelo" && index===4) title = "Caliche y suelo rocoso";
+  if (id==="suelo" && index===4) title = "Posibles preguntas de examen · Caliche y suelo rocoso";
   if (id==="esfuerzos" && (index===1 || index===2)) title = "Práctica con dibujo · elementos principales";
   return `<div class="study-prompts inline-prompts"><h3>${confirmed?examStar:""}${title}</h3>
   ${promptCards(entries)}
@@ -681,7 +684,7 @@ function challengeIllustration(item) {
 
 function renderSolvedExam() {
   const profileCards = perfilesConCuatroHorizontes.map(profile => ({
-    topic: 14, title: profile.titulo,
+    topic: 14, title: profile.titulo, destacada:true,
     question: "Identifica qué horizonte señala cada una de las cuatro marcas.",
     image: trainingProfile(profile),
     answer: profile.correccion.map(([mark,horizon,why]) =>
@@ -699,8 +702,8 @@ function renderSolvedExam() {
       const topic = externos.some(lesson => lesson.id === id) ? 14 : 15;
       const special = id === "meteorizacion" ? gruposMeteorizacion.filter(Boolean).flatMap(group => group.flatMap(([,entries])=>entries))
         : id === "sedimentarias" ? preguntasRocasSedimentarias.flatMap(([,entries])=>entries) : [];
-      return [...(studyQuestions[id] || []), ...Object.values(extraQuestions[id] || {}), ...special].map(([question,answer]) => ({
-        topic, title:titulo, question, answer,
+      return [...(studyQuestions[id] || []), ...Object.values(extraQuestions[id] || {}), ...special].map(([question,answer,destacada]) => ({
+        topic, title:topic === 14 && id === "suelo" && /caliche|suelo muy delgada|costra de cal/i.test(question) ? "Posible pregunta de examen · Caliche y suelo rocoso" : titulo, question, answer, destacada:destacada || (id === "meta" && question.startsWith("Ordena la serie regional")),
         image:Object.entries(withImage).find(([start])=>question.includes(start))?.[1]()
       }));
     }),
@@ -716,9 +719,11 @@ function renderSolvedExam() {
   ];
   const panel = $("solved-exam");
   const topic = $("solved-topic");
+  const onlyPossible = $("solved-only-possible");
   let index = 0;
   function show(focus=false) {
-    const visible = topic.value ? cards.filter(card=>card.topic===Number(topic.value)) : cards;
+    const visible = cards.filter(card =>
+      (!topic.value || card.topic === Number(topic.value)) && (!onlyPossible.checked || card.destacada));
     const {title,question,image,answer} = visible[index];
     panel.innerHTML = `<section class="block">
       <p class="muted">Pregunta ${index+1} de ${visible.length}</p>
@@ -733,7 +738,7 @@ function renderSolvedExam() {
     $("solved-next").onclick = () => { index++; show(true); };
     if (focus) panel.querySelector("h2").focus();
   }
-  topic.onchange = () => { index = 0; show(); };
+  topic.onchange = onlyPossible.onchange = () => { index = 0; show(); };
   show();
 }
 
@@ -741,6 +746,7 @@ const drafts = new Map();
 function renderChallenges() {
   screen.innerHTML += `<p>Lee una posible pregunta y repasa la solución que aparece debajo.</p>
   <label for="solved-topic">Ver preguntas de <select id="solved-topic"><option value="">Los dos temas</option><option value="14">Tema 14</option><option value="15">Tema 15</option></select></label>
+  <p><label><input type="checkbox" id="solved-only-possible"> Solo posibles preguntas de examen destacadas</label></p>
   <div id="solved-exam"></div>
   <details><summary>Practicar sin ver la respuesta</summary>
   <div class="challenge-controls">
