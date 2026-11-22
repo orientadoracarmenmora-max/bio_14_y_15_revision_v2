@@ -2,7 +2,7 @@
 
 const meteorizacionMecanica = {
  "gelifraccion": "El agua penetra en las grietas. Al congelarse, aumenta de volumen y ejerce presión sobre sus paredes. Esa presión puede fragmentar la roca.",
- "descompresion": "Una roca se forma en profundidad, a gran presión. Cuando asciende hacia la superficie, la presión disminuye. Al disminuir la presión, la roca se expande y puede fragmentarse.",
+ "descompresion": "Las rocas que se han formado en el interior de la corteza terrestre a altas presiones, cuando suben hacia la superficie soportan menos presión y pueden fragmentarse.",
  "abrasion": "Los clastos que transportan el viento, el agua o el hielo desgastan la roca por rozamiento.",
  "termoclastia": "En una roca expuesta al sol pueden producirse grandes diferencias de temperatura entre su superficie y su interior. Esto provoca dilataciones desiguales que pueden fracturar y fragmentar la roca."
 };
