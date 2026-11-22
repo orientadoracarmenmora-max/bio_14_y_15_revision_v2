@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Repaso interactivo de procesos geológicos externos e internos para 1.º de Bachillerato.">
+<title>Procesos geológicos · Temas 14 y 15 · Revisada V2</title>
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="stylesheet" href="./estilo.css?v=25">
+<script defer src="./tema.js?v=26"></script>
+<script defer src="./externos.js?v=36"></script>
+<script defer src="./actividades.js?v=21"></script>
+<script defer src="./app.js?v=65"></script>
+<script defer src="./puntero.js?v=26"></script>
+<style>
+.soil-factor { background: #f8dce7; color: #2b2025; padding-inline: .28em; border-radius: .2em; }
+:root.contrast .soil-factor { background: var(--fill); color: var(--ink); }
+.study-points { padding-inline-start: 1.45em; }
+.study-points > li + li { margin-block-start: .55em; }
+@media print { .study-points > li { break-inside: avoid; } }
+ .tectonic-study { container-type: inline-size; }
+.tectonic-labels { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .3rem; margin-top: .6rem; }
+.tectonic-labels > div { padding: .35rem; border: 1px solid var(--line); border-radius: .35rem .35rem 0 0; background: var(--paper); overflow-wrap: anywhere; }
+.tectonic-labels strong, .tectonic-labels span { display: block; }
+.tectonic-crop { position: relative; overflow: hidden; aspect-ratio: 610 / 388; }
+.tectonic-crop img { position: absolute; width: 180.33%; max-width: none; height: auto; max-height: none; left: -44.26%; top: -47.42%; }
+.tectonic-arrow { position: absolute; left: var(--x); top: var(--y); width: var(--length); height: 2px; background: #1a1511; box-shadow: 0 0 0 1px #fff; transform-origin: left center; transform: rotate(var(--angle)); }
+.tectonic-arrow::before { content: ""; position: absolute; left: -2px; top: 50%; transform: translateY(-50%); border-block: 5px solid transparent; border-right: 9px solid #1a1511; filter: drop-shadow(0 0 1px #fff); }
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top"><a href="#inicio" class="brand">Cuaderno de Geología</a>
+<details class="settings"><summary>Accesibilidad y lectura</summary><div class="controls">
+<div role="group" aria-label="Accesibilidad">
+<div><label for="size">Letra</label><select id="size"><option value="100">Normal</option><option value="120">Grande</option><option value="145">Muy grande</option></select></div>
+<label><input type="checkbox" id="contrast"> Alto contraste</label>
+<div><label for="voice">Voz</label><select id="voice"><option value="">Automática (Google o voz del dispositivo)</option></select></div>
+<div><label for="rate">Velocidad</label><select id="rate"><option value=".75">0,75×</option><option value=".9">0,9×</option><option selected value="1">1×</option><option value="1.15">1,15×</option></select></div>
+</div>
+</div></details></header>
+<div class="barra-puntero" id="barra-puntero" hidden>
+ <div class="controles-puntero">
+  <button type="button" class="icono-puntero" id="activar-puntero" aria-label="Puntero" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg></button>
+  <button type="button" class="icono-puntero" id="abrir-ajustes-puntero" aria-label="Ajustes del puntero" aria-expanded="false" aria-controls="ajustes-puntero"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m10 3-.5 2.4-1.6.9-2.3-.8-2 3.5 1.8 1.6v1.8l-1.8 1.6 2 3.5 2.3-.8 1.6.9.5 2.4h4l.5-2.4 1.6-.9 2.3.8 2-3.5-1.8-1.6v-1.8l1.8-1.6-2-3.5-2.3.8-1.6-.9L14 3z"/><circle cx="12" cy="11.5" r="2.7"/></svg></button>
+ </div>
+ <section id="ajustes-puntero" class="ajustes-puntero" aria-label="Ajustes del puntero" hidden></section>
+</div>
+<canvas id="capa-puntero" aria-hidden="true" hidden></canvas>
+<div class="layout">
+<nav aria-label="Navegación del tema"><a href="#inicio">Inicio</a><a href="#externos">Tema 14 · Externos</a><a href="#internos">Tema 15 · Internos</a><a href="#examen">Qué entra</a><a href="#retos">Actividades de examen</a><a href="#simulacro">Simulacro</a><a href="#serie">Ordenar la serie</a><a href="#practica">Autoevaluación</a><a href="#repaso">Repaso y progreso</a></nav>
+<main id="contenido" tabindex="-1">
+<div class="tools"><button id="speak" class="speaker" aria-pressed="false" aria-label="Leer pantalla en voz alta" title="Leer pantalla en voz alta"><span aria-hidden="true">🔊</span></button><button id="stop">Detener lectura</button><button id="print">Imprimir apuntes</button><span id="speech-status" role="status"></span></div>
+<div id="screen"></div>
+<div id="printout"></div>
+<noscript>Activa JavaScript para abrir las explicaciones y realizar los ejercicios.</noscript>
+</main>
+</div>
+</body>
+</html>
