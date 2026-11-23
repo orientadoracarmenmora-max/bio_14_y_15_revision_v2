@@ -1191,21 +1191,27 @@ function figureGuide(file) {
   return `<p><strong>${label}</strong></p><ul class="explanation figure-guide" aria-label="${label}">${rows.map(([term,description])=>`<li><strong>${term}.</strong> ${description}</li>`).join("")}</ul>`;
 }
 
-function tectonicStudyFigure() {
+const fraccionesMagma = [
+  "<strong>Fracción líquida.</strong> Es la roca fundida, rica en <strong>sílice</strong>.",
+  "<strong>Fracción sólida.</strong> Contiene cristales en suspensión y puede contener fragmentos de roca sin fundir.",
+  "<strong>Fracción gaseosa.</strong> Contiene gases disueltos, como vapor de agua y dióxido de carbono."
+];
+
+function tectonicStudyFigure(withLabels = true) {
   return `<figure class="book-figure tectonic-study">
-    <figcaption><strong>Los tres procesos en el dibujo</strong></figcaption>
+    ${withLabels ? `<figcaption><strong>Los tres procesos en el dibujo</strong></figcaption>
     <div class="tectonic-labels">
       <div><strong>Magmatismo</strong><span>Subducción → se forma magma.</span></div>
       <div><strong>Metamorfismo</strong><span>Los sedimentos se comprimen y cambian en estado sólido.</span></div>
       <div><strong>Esfuerzos tectónicos</strong><span>Falla transformante → cizalla. Los bloques se mueven de lado.</span></div>
-    </div>
-    <div class="tectonic-crop" aria-hidden="true">
+    </div>` : ""}
+    <div class="tectonic-crop" role="img" aria-label="Corte de la Tierra con tres flechas que señalan distintas zonas del dibujo">
       <img src="https://orientadoracarmenmora-max.github.io/bio_14_y_15_revision_v2/15-tectonica.webp?v=16" alt="" loading="lazy">
       <span class="tectonic-arrow" style="--x:14.3%;--y:41%;--length:26.2cqw;--angle:-85deg"></span>
       <span class="tectonic-arrow" style="--x:31%;--y:37.5%;--length:30.4cqw;--angle:-52deg"></span>
       <span class="tectonic-arrow" style="--x:45.4%;--y:26.3%;--length:41.6cqw;--angle:-24deg"></span>
     </div>
-    <p><a href="https://orientadoracarmenmora-max.github.io/bio_14_y_15_revision_v2/15-tectonica.webp?v=16" target="_blank" rel="noopener">Ver el dibujo completo del libro</a></p>
+    ${withLabels ? `<p><a href="https://orientadoracarmenmora-max.github.io/bio_14_y_15_revision_v2/15-tectonica.webp?v=16" target="_blank" rel="noopener">Ver el dibujo completo del libro</a></p>` : ""}
   </figure>`;
 }
 
@@ -1535,10 +1541,15 @@ function renderSolvedExam(finalStudy = false) {
         ["La presión y la temperatura cambian una roca que permanece sólida. ¿Qué proceso es?",[diferenciasProcesosInternos[1]]],
         ["Las capas se curvan, o se rompen y los bloques se desplazan. ¿Qué actúa sobre ellas?",[diferenciasProcesosInternos[2]]]
       ]),
-      ...toCards("Tema 15 · Los tres procesos en el dibujo",studyQuestions.magma.slice(1,2))
-        .map(card=>({...card,image:tectonicStudyFigure()})),
-      ...toCards("Tema 15 · El magma y sus componentes",[extraQuestions.magma[1],studyQuestions.magma[3]])
-        .map(card=>({...card,image:figures({id:"magma"},1)})),
+      {title:"Mira el bloque del diagrama", image:tectonicStudyFigure(false),
+        answer:studyQuestions.magma[1][1], answerImage:tectonicStudyFigure()},
+      ...toCards("Tema 15 · El magma y sus componentes",[
+        ["¿Qué es el magma? Nombra sus tres componentes.",[
+          "El <strong>magma</strong> se forma cuando parte de la roca se funde en el interior de la Tierra.",
+          ...fraccionesMagma
+        ]],
+        [studyQuestions.magma[3][0],["Se llama <strong>magma</strong>.",...fraccionesMagma]]
+      ]).map(card=>({...card,imageInAnswerOnly:true,image:figures({id:"magma"},1)})),
       ...toCards("Tema 15 · Plutón y dique",studyQuestions.magma.slice(4,6))
         .map(card=>({...card,image:figures({id:"magma"},2)})),
       ...toCards("Tema 15 · Erupciones y productos volcánicos",[
@@ -1674,12 +1685,12 @@ function renderSolvedExam(finalStudy = false) {
   function show(focus=false) {
     const visible = visibleCards();
     if (finalStudy) studySection.value = String(currentSections.filter(section=>section.position <= index).at(-1).position);
-    const {title,question,image,answer,resource,imageInAnswerOnly} = visible[index];
+    const {title,question,image,answer,resource,imageInAnswerOnly,answerImage} = visible[index];
     panel.innerHTML = `<section class="block">
       <p class="muted">Pregunta ${index+1} de ${visible.length}</p>
       <h2 tabindex="-1">${title}</h2>
-      <p><strong>${question}</strong></p>${imageInAnswerOnly ? "" : image || ""}${resource || ""}
-      ${finalStudy ? `<details><summary>Ver respuesta modelo</summary>${modelExplanation(answer)}${image || ""}</details>` : `<h3>Respuesta modelo</h3>${modelExplanation(answer)}`}
+      ${question ? `<p><strong>${question}</strong></p>` : ""}${imageInAnswerOnly ? "" : image || ""}${resource || ""}
+      ${finalStudy ? `<details><summary>Ver respuesta modelo</summary>${modelExplanation(answer)}${answerImage ?? image ?? ""}</details>` : `<h3>Respuesta modelo</h3>${modelExplanation(answer)}`}
       <div class="actions">
         <button type="button" id="solved-prev" ${index===0?"disabled":""}>Anterior</button>
         <button type="button" id="solved-next" class="primary" ${index===visible.length-1?"disabled":""}>Siguiente</button>
