@@ -1205,8 +1205,9 @@ function figureGuide(file) {
   return `<p><strong>${label}</strong></p><ul class="explanation figure-guide" aria-label="${label}">${rows.map(([term,description])=>`<li><strong>${term}.</strong> ${description}</li>`).join("")}</ul>`;
 }
 
+const definicionMagmaRepaso = "El <strong>magma</strong> es roca fundida que contiene <strong>gases disueltos</strong> y <strong>sílice</strong>.";
 const fraccionesMagma = [
-  "<strong>Fracción líquida.</strong> Es la roca fundida, rica en <strong>sílice</strong>.",
+  "<strong>Fracción líquida.</strong> Es la roca fundida.",
   "<strong>Fracción sólida.</strong> Contiene cristales en suspensión y puede contener fragmentos de roca sin fundir.",
   "<strong>Fracción gaseosa.</strong> Contiene gases disueltos, como vapor de agua y dióxido de carbono."
 ];
@@ -1586,10 +1587,10 @@ function renderSolvedExam(finalStudy = false) {
       ]),
       ...toCards("Tema 15 · El magma y sus componentes",[
         ["¿Qué es el magma? Nombra sus tres componentes.",[
-          "El <strong>magma</strong> se forma cuando parte de la roca se funde en el interior de la Tierra.",
+          definicionMagmaRepaso,
           ...fraccionesMagma
         ]],
-        [studyQuestions.magma[3][0],["Se llama <strong>magma</strong>.",...fraccionesMagma]]
+        [studyQuestions.magma[3][0],[definicionMagmaRepaso,...fraccionesMagma]]
       ]).map(card=>({...card,image:figures({id:"magma"},1)})),
       ...toCards("Tema 15 · Plutón y dique",studyQuestions.magma.slice(4,6))
         .map(card=>({...card,image:figures({id:"magma"},2)})),
