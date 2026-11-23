@@ -1056,9 +1056,13 @@ const preguntasRocasSedimentarias = [
     ["¿En qué se diferencian las rocas detríticas, las no detríticas y las mixtas?",[origenRocasDetriticas,"Las no detríticas se forman a partir de sustancias disueltas en el agua que se convierten en sólidos, o de materia orgánica. Las mixtas combinan minerales formados a partir de sustancias disueltas y clastos de otras rocas."]]
   ]],
   ["Te dan el nombre · explica las características",[
-    ["¿Cómo describirías una pudinga y una brecha?",tiposRocasDetriticas.slice(0,3),true],
+    ["¿Cómo describirías una pudinga y una brecha?",[
+      "Son <strong>conglomerados (rocas detríticas)</strong> porque predominan los clastos de <strong>más de 2 mm</strong>.",
+      "<strong>Pudinga.</strong> Tiene cantos <strong>redondeados</strong>.",
+      "<strong>Brecha.</strong> Tiene fragmentos <strong>angulosos</strong>."
+    ],true],
     ["¿Qué tamaño tienen los granos de la arenisca? ¿Y los del limo y la arcilla?",tiposRocasDetriticas.slice(3)],
-    ["¿En qué se diferencian una caliza y una dolomía por su composición?",composicionCarbonatadas],
+    ["¿En qué se diferencian una caliza y una dolomía por su composición?",["Ambas son <strong>rocas carbonatadas</strong>.",...composicionCarbonatadas]],
     ["¿Cómo se forman las rocas evaporíticas? Indica el mineral principal de los yesos y da un ejemplo de mineral de las sales.",rocasEvaporiticas],
     ["¿Cómo distinguirías una muestra de turba de una de antracita? ¿De qué materia orgánica procede el petróleo?","La turba es parda, conserva restos vegetales y contiene entre un 45 % y un 65 % de carbono. La antracita es gris, tiene brillo metálico y contiene entre un 90 % y un 95 % de carbono. El petróleo es líquido y procede de materia orgánica de microorganismos marinos enterrada en sedimentos arcillosos sin oxígeno."]
   ]],
@@ -1513,8 +1517,12 @@ function renderSolvedExam(finalStudy = false) {
           [[4]]
         ];
         return toCards(groupIndex === 3 ? format : `Rocas sedimentarias · ${format}`,entries)
-          .map((card,i)=>({...card,imageInAnswerOnly:groupIndex===0 && i===1,image:imagesByGroup[groupIndex][i]
-            .map(key=>figures({id:"sedimentarias"},key)).join("")}));
+          .map((card,i)=>({
+            ...card,
+            imageInAnswerOnly:(groupIndex===0 && i===1) || (groupIndex===1 && i<=2),
+            image:imagesByGroup[groupIndex][i].map(key=>figures({id:"sedimentarias"},key)).join("") +
+              (groupIndex===1 && i===0 ? `<figure class="book-figure"><img src="https://live.staticflickr.com/8365/8512840471_eb6cd4f6ca_o.jpg" alt="Brecha sedimentaria con fragmentos claros de bordes angulosos" loading="lazy"><figcaption><strong>Brecha sedimentaria.</strong> Fragmentos angulosos. <a href="https://commons.wikimedia.org/wiki/File:Breccia.jpg" target="_blank" rel="noopener">Foto de James St. John</a> · <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>.</figcaption></figure>` : "")
+          }));
       }),
       ...toCards("Tema 15 · Los tres procesos geológicos internos",studyQuestions.magma.slice(0,1)),
       ...toCards("Tema 15 · Reconoce el proceso",[
