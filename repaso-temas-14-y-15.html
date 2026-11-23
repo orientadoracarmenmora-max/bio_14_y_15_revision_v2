@@ -1430,7 +1430,7 @@ function renderSolvedExam(finalStudy = false) {
   const profileCards = perfilesRepaso.map(profile => ({
     topic: 14, title: profile.titulo, destacada:true,
     question: "Escribe el nombre del horizonte que señala cada letra.",
-    image: trainingProfile(profile),
+    promptImage: trainingProfile(profile),
     answer: [
       ...profile.correccion.map(([mark,horizon,why])=>`<strong>Marca ${mark} · Horizonte ${horizon}.</strong> ${why}`),
       ...(profile.nota ? [profile.nota] : [])
@@ -1517,7 +1517,7 @@ function renderSolvedExam(finalStudy = false) {
         ["El agua lleva sales disueltas. ¿Cómo se transportan?","Por disolución. Las sales viajan disueltas en el agua."]
       ]),
       ...toCards("Madurez textural · compara dos muestras",studyQuestions.sedimentos.slice(4,5))
-        .map(card=>({...card,image:figures({id:"sedimentos"},3)})),
+        .map(card=>({...card,promptImage:figures({id:"sedimentos"},3)})),
       ...toCards("Sedimentación · dos formas de depósito",studyQuestions.sedimentos.slice(5,6))
         .map(card=>({...card,image:figures({id:"sedimentos"},4)})),
       ...preguntasRocasSedimentarias.flatMap(([format,entries],groupIndex)=> {
@@ -1530,7 +1530,6 @@ function renderSolvedExam(finalStudy = false) {
         return toCards(groupIndex === 3 ? format : `Rocas sedimentarias · ${format}`,entries)
           .map((card,i)=>({
             ...card,
-            imageInAnswerOnly:(groupIndex===0 && i===1) || groupIndex===1,
             image:imagesByGroup[groupIndex][i].map(key=>figures({id:"sedimentarias"},key)).join("") +
               (groupIndex===1 && i===0 ? `<figure class="book-figure"><img src="https://live.staticflickr.com/8365/8512840471_eb6cd4f6ca_o.jpg" alt="Brecha sedimentaria con fragmentos claros de bordes angulosos" loading="lazy"><figcaption><strong>Brecha sedimentaria.</strong> Fragmentos angulosos. <a href="https://commons.wikimedia.org/wiki/File:Breccia.jpg" target="_blank" rel="noopener">Foto de James St. John</a> · <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>.</figcaption></figure>` : "")
           }));
@@ -1541,15 +1540,15 @@ function renderSolvedExam(finalStudy = false) {
         ["La presión y la temperatura cambian una roca que permanece sólida. ¿Qué proceso es?",[diferenciasProcesosInternos[1]]],
         ["Las capas se curvan, o se rompen y los bloques se desplazan. ¿Qué actúa sobre ellas?",[diferenciasProcesosInternos[2]]]
       ]),
-      {title:"Mira el bloque del diagrama", image:tectonicStudyFigure(false),
-        answer:studyQuestions.magma[1][1], answerImage:tectonicStudyFigure()},
+      {title:"Mira el bloque del diagrama", promptImage:tectonicStudyFigure(false),
+        answer:studyQuestions.magma[1][1], image:tectonicStudyFigure()},
       ...toCards("Tema 15 · El magma y sus componentes",[
         ["¿Qué es el magma? Nombra sus tres componentes.",[
           "El <strong>magma</strong> se forma cuando parte de la roca se funde en el interior de la Tierra.",
           ...fraccionesMagma
         ]],
         [studyQuestions.magma[3][0],["Se llama <strong>magma</strong>.",...fraccionesMagma]]
-      ]).map(card=>({...card,imageInAnswerOnly:true,image:figures({id:"magma"},1)})),
+      ]).map(card=>({...card,image:figures({id:"magma"},1)})),
       ...toCards("Tema 15 · Plutón y dique",studyQuestions.magma.slice(4,6))
         .map(card=>({...card,image:figures({id:"magma"},2)})),
       ...toCards("Tema 15 · Erupciones y productos volcánicos",[
@@ -1566,9 +1565,16 @@ function renderSolvedExam(finalStudy = false) {
       ]).map(card=>({...card,image:figures({id:"magma"},3)})),
       ...toCards("Tema 15 · Factores de la actividad volcánica",[
         studyQuestions.magma[8],
-        ["Un magma contiene mucha sílice y le cuesta fluir. ¿Qué factor lo explica?",[factoresActividadVolcanica[0]]],
-        ["Dos magmas tienen la misma composición. El más caliente fluye mejor. ¿Qué factor lo explica?",[factoresActividadVolcanica[1]]],
-        ["Cuando el magma asciende, baja la presión y se forman burbujas. ¿Qué factor interviene?",[factoresActividadVolcanica[2]]],
+        ...[
+          ["¿Cómo influye la composición del magma en la actividad volcánica?",
+           "Un magma contiene mucha sílice y le cuesta fluir. ¿Qué factor lo explica?"],
+          ["¿Cómo influye la temperatura del magma en la actividad volcánica?",
+           "Dos magmas tienen la misma composición. El más caliente fluye mejor. ¿Qué factor lo explica?"],
+          ["¿Cómo influye la cantidad de gases disueltos en la actividad volcánica?",
+           "Cuando el magma asciende, baja la presión y se forman burbujas. ¿Qué factor interviene?"],
+          ["¿Cómo influye el lugar donde ocurre la erupción en la actividad volcánica?",
+           "La lava se enfría de golpe y forma estructuras redondeadas, como almohadillas. ¿Qué factor lo explica? ¿Dónde ocurrió la erupción?"]
+        ].flatMap((pair,i)=>pair.map(question=>[question,[factoresActividadVolcanica[i]]])),
         studyQuestions.magma[9]
       ]),
       ...toCards("Tema 15 · Enfriamiento del magma",[studyQuestions.igneas[0],studyQuestions.igneas[2]])
@@ -1607,7 +1613,19 @@ function renderSolvedExam(finalStudy = false) {
         ["Sigue un camino posible: de roca expuesta a sedimentos, de ahí a roca sedimentaria y metamórfica, y al final a magma y roca ígnea. ¿Qué ocurre en cada paso?",caminosCicloRocas]
       ]).map(card=>({...card,image:figures({id:"ciclo"},3)})),
       ...studyQuestions.esfuerzos.map(([question,answer],i)=>({
-        title:"Pliegues y fallas",question,answer,
+        title:"Pliegues y fallas",
+        question:i ? "Identifica y define el elemento que señala cada letra del dibujo." : question,
+        answer:i===1 ? [
+          "<strong>A · Charnela.</strong> Es la zona de mayor curvatura.",
+          "<strong>B · Flancos.</strong> Son los lados del pliegue, a ambos lados de la charnela.",
+          "<strong>C · Plano axial.</strong> Pasa por las charnelas de las capas plegadas.",
+          "<strong>D · Núcleo.</strong> Es la zona más interna del pliegue."
+        ] : i===2 ? [
+          "<strong>A · Plano de falla.</strong> Es la superficie de rotura por la que se desplazan los bloques.",
+          "<strong>B · Labios.</strong> Son los bloques situados a ambos lados del plano de falla.",
+          "<strong>C · Salto.</strong> Es el desplazamiento entre los bloques, que se aprecia al comparar la posición de una misma capa."
+        ] : answer,
+        promptImage:i ? mockCut(i===1 ? "pliegue" : "falla") : "",
         image:i ? figures({id:"esfuerzos"},i) : ""
       }))
     ];
@@ -1685,12 +1703,12 @@ function renderSolvedExam(finalStudy = false) {
   function show(focus=false) {
     const visible = visibleCards();
     if (finalStudy) studySection.value = String(currentSections.filter(section=>section.position <= index).at(-1).position);
-    const {title,question,image,answer,resource,imageInAnswerOnly,answerImage} = visible[index];
+    const {title,question,image,answer,resource,promptImage} = visible[index];
     panel.innerHTML = `<section class="block">
       <p class="muted">Pregunta ${index+1} de ${visible.length}</p>
       <h2 tabindex="-1">${title}</h2>
-      ${question ? `<p><strong>${question}</strong></p>` : ""}${imageInAnswerOnly ? "" : image || ""}${resource || ""}
-      ${finalStudy ? `<details><summary>Ver respuesta modelo</summary>${modelExplanation(answer)}${answerImage ?? image ?? ""}</details>` : `<h3>Respuesta modelo</h3>${modelExplanation(answer)}`}
+      ${question ? `<p><strong>${question}</strong></p>` : ""}${promptImage ?? (finalStudy ? "" : image ?? "")}${resource || ""}
+      ${finalStudy ? `<details><summary>Ver respuesta modelo</summary>${modelExplanation(answer)}${image ?? ""}</details>` : `<h3>Respuesta modelo</h3>${modelExplanation(answer)}`}
       <div class="actions">
         <button type="button" id="solved-prev" ${index===0?"disabled":""}>Anterior</button>
         <button type="button" id="solved-next" class="primary" ${index===visible.length-1?"disabled":""}>Siguiente</button>
