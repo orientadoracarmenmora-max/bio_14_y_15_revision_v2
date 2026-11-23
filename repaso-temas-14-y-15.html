@@ -94,6 +94,7 @@ textarea{display:block;width:100%;margin:.3rem 0 .85rem;padding:.65rem;backgroun
 .belen-star{color:var(--accent);font-size:1.15em;font-weight:700}
 
 .layout.study-only { display:block; max-width:64rem; margin-inline:auto; }
+#study-section, #study-topic { max-width:100%; }
 
 .soil-factor { background: #f8dce7; color: #2b2025; padding-inline: .28em; border-radius: .2em; }
 :root.contrast .soil-factor { background: var(--fill); color: var(--ink); }
@@ -1401,7 +1402,7 @@ function challengeIllustration(item) {
 }
 
 function renderFinalStudy() {
-  screen.innerHTML += '<p><label for="study-topic">Elige qué repasar <select id="study-topic"><option value="14">Tema 14 · Procesos externos</option><option value="15">Tema 15 · Procesos internos</option><option value="">Los dos temas</option></select></label></p><div id="solved-exam"></div>';
+  screen.innerHTML += '<p><label for="study-topic">Elige qué repasar <select id="study-topic"><option value="14">Tema 14 · Procesos externos</option><option value="15">Tema 15 · Procesos internos</option><option value="">Los dos temas</option></select></label></p><p><label for="study-section">Índice de apartados <select id="study-section"></select></label></p><div id="solved-exam"></div>';
   renderSolvedExam(true);
 }
 
@@ -1551,10 +1552,53 @@ function renderSolvedExam(finalStudy = false) {
   const onlyPossible = $("solved-only-possible");
   let index = 0;
   const studyTopic = $("study-topic");
+  const studySection = $("study-section");
   const firstInternal = cards.findIndex(card=>card.title.startsWith("Tema 15"));
+  const sections = [
+    ["Meteorización", "Meteorización ·"],
+    ["Formación del suelo", "Formación del suelo"],
+    ["Horizontes del suelo", "Horizontes del suelo"],
+    ["Propiedades y fertilidad", "Propiedades del suelo"],
+    ["Caliche y suelo rocoso", "Tipos de suelo"],
+    ["Erosión, detrito y sedimentación", "Erosión, detrito"],
+    ["Tipos de transporte", "Tipos de transporte"],
+    ["Madurez textural", "Madurez textural"],
+    ["Formas de depósito", "Sedimentación ·"],
+    ["Rocas sedimentarias", "Rocas sedimentarias ·"],
+    ["Minerales del tema 14", "Minerales ·"],
+    ["Los tres procesos internos", "Tema 15 · Los tres procesos geológicos"],
+    ["Magma y sus componentes", "Tema 15 · El magma"],
+    ["Plutón y dique", "Tema 15 · Plutón"],
+    ["Erupciones y productos volcánicos", "Tema 15 · Erupciones"],
+    ["Partes del volcán", "Tema 15 · Partes"],
+    ["Factores de la actividad volcánica", "Tema 15 · Factores"],
+    ["Enfriamiento del magma", "Tema 15 · Enfriamiento"],
+    ["Textura y estructura", "Tema 15 · Textura"],
+    ["Rocas magmáticas", "Tema 15 · Reconocimiento"],
+    ["Metamorfismo y sus factores", "Tema 15 · Metamorfismo y"],
+    ["Cambios en la roca", "Tema 15 · Cambios"],
+    ["Tipos de metamorfismo", "Tema 15 · Tres tipos"],
+    ["Serie regional", "Tema 15 · Serie regional"],
+    ["Rocas metamórficas", "Tema 15 · Rocas metamórficas"],
+    ["Silicatos, olivino y granate", "Tema 15 · Silicatos"],
+    ["Ciclo de las rocas", "Tema 15 · Ciclo"],
+    ["Pliegues y fallas", "Pliegues y fallas"]
+  ];
+  const visibleCards = () => finalStudy
+    ? cards.filter((_,i)=>!studyTopic.value || (studyTopic.value === "14" ? i < firstInternal : i >= firstInternal))
+    : cards.filter(card=>(!topic.value || card.topic === Number(topic.value)) && (!onlyPossible.checked || card.destacada));
+  let currentSections = [];
+  function refreshStudyIndex() {
+    const visible = visibleCards();
+    currentSections = sections.flatMap(([label,prefix])=>{
+      const position = visible.findIndex(card=>card.title.startsWith(prefix));
+      return position < 0 ? [] : [{label,position}];
+    });
+    studySection.replaceChildren(...currentSections.map(({label,position})=>new Option(label,String(position))));
+  }
   function show(focus=false) {
-    const visible = finalStudy ? cards.filter((_,i)=>!studyTopic.value || (studyTopic.value === "14" ? i < firstInternal : i >= firstInternal)) : cards.filter(card =>
-      (!topic.value || card.topic === Number(topic.value)) && (!onlyPossible.checked || card.destacada));
+    const visible = visibleCards();
+    if (finalStudy) studySection.value = String(currentSections.filter(section=>section.position <= index).at(-1).position);
     const {title,question,image,answer,resource} = visible[index];
     panel.innerHTML = `<section class="block">
       <p class="muted">Pregunta ${index+1} de ${visible.length}</p>
@@ -1569,7 +1613,11 @@ function renderSolvedExam(finalStudy = false) {
     $("solved-next").onclick = () => { index++; show(true); };
     if (focus) panel.querySelector("h2").focus();
   }
-  if (finalStudy) studyTopic.onchange = () => { index = 0; show(); };
+  if (finalStudy) {
+    refreshStudyIndex();
+    studyTopic.onchange = () => { index = 0; refreshStudyIndex(); show(); };
+    studySection.onchange = () => { index = Number(studySection.value); show(true); };
+  }
   else topic.onchange = onlyPossible.onchange = () => { index = 0; show(); };
   show();
 }
