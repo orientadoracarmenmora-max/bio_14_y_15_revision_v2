@@ -157,7 +157,8 @@ const caminosCicloRocas = [
  "<strong>Roca expuesta → sedimentos.</strong> La meteorización fragmenta o altera la roca. Los materiales se erosionan, se transportan y se depositan.",
  "<strong>Sedimentos → roca sedimentaria.</strong> Los sedimentos se compactan y sus granos se unen. Esa transformación se llama <strong>diagénesis</strong>.",
  "<strong>Roca → roca metamórfica.</strong> La presión o la temperatura transforman la roca en <strong>estado sólido</strong>. Es el <strong>metamorfismo</strong>.",
- "<strong>Roca → magma → roca ígnea.</strong> Si la roca se funde, se forma <strong>magma</strong>. Al enfriarse y solidificarse, el magma forma una <strong>roca ígnea</strong>."
+ "<strong>Roca → magma.</strong> Si la roca se funde, se forma <strong>magma</strong>.",
+ "<strong>Magma → roca ígnea.</strong> Al enfriarse y solidificarse, el magma forma una <strong>roca ígnea</strong>."
 ];
 
 const serieRegionalCuaderno = [
@@ -1619,7 +1620,14 @@ function renderSolvedExam(finalStudy = false) {
         .map(card=>({...card,image:figures({id:"ciclo"},1)})),
       ...toCards("Tema 15 · Ciclo de las rocas",[
         studyQuestions.ciclo[1],
-        ["Sigue un camino posible: de roca expuesta a sedimentos, de ahí a roca sedimentaria y metamórfica, y al final a magma y roca ígnea. ¿Qué ocurre en cada paso?",caminosCicloRocas]
+        ["Sigue un camino posible: de roca expuesta a sedimentos, de ahí a roca sedimentaria y metamórfica, y al final a magma y roca ígnea. ¿Qué ocurre en cada paso?",caminosCicloRocas],
+        ...[
+          ["¿Cómo se forman los sedimentos a partir de una roca expuesta?", "Una roca en superficie se fragmenta. El agua arrastra los fragmentos y los deposita. ¿Qué se ha formado?"],
+          ["¿Cómo pasan los sedimentos a formar una roca sedimentaria?", "El peso de las capas compacta los sedimentos y sus granos se unen. ¿Cómo se llama el proceso y qué tipo de roca se forma?"],
+          ["¿Cómo puede una roca sedimentaria convertirse en una roca metamórfica?", "La presión o la temperatura transforman una roca que sigue en estado sólido. ¿Qué proceso ocurre y qué tipo de roca se forma?"],
+          ["¿Qué tiene que suceder para que una roca se convierta en magma?", "Una roca del interior terrestre se funde. ¿Qué se forma?"],
+          ["¿Cómo se forma una roca ígnea a partir del magma?", "El magma se enfría y se solidifica. ¿Qué tipo de roca se forma?"]
+        ].flatMap((pair,i)=>pair.map(question=>[question,[caminosCicloRocas[i]]]))
       ]).map(card=>({...card,image:figures({id:"ciclo"},3)})),
       ...studyQuestions.esfuerzos.map(([question,answer],i)=>({
         title:"Pliegues y fallas",
