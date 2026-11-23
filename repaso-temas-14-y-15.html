@@ -1513,7 +1513,7 @@ function renderSolvedExam(finalStudy = false) {
           [[4]]
         ];
         return toCards(groupIndex === 3 ? format : `Rocas sedimentarias · ${format}`,entries)
-          .map((card,i)=>({...card,image:imagesByGroup[groupIndex][i]
+          .map((card,i)=>({...card,imageInAnswerOnly:groupIndex===0 && i===1,image:imagesByGroup[groupIndex][i]
             .map(key=>figures({id:"sedimentarias"},key)).join("")}));
       }),
       ...toCards("Tema 15 · Los tres procesos geológicos internos",studyQuestions.magma.slice(0,1)),
@@ -1661,11 +1661,11 @@ function renderSolvedExam(finalStudy = false) {
   function show(focus=false) {
     const visible = visibleCards();
     if (finalStudy) studySection.value = String(currentSections.filter(section=>section.position <= index).at(-1).position);
-    const {title,question,image,answer,resource} = visible[index];
+    const {title,question,image,answer,resource,imageInAnswerOnly} = visible[index];
     panel.innerHTML = `<section class="block">
       <p class="muted">Pregunta ${index+1} de ${visible.length}</p>
       <h2 tabindex="-1">${title}</h2>
-      <p><strong>${question}</strong></p>${image || ""}${resource || ""}
+      <p><strong>${question}</strong></p>${imageInAnswerOnly ? "" : image || ""}${resource || ""}
       ${finalStudy ? `<details><summary>Ver respuesta modelo</summary>${modelExplanation(answer)}${image || ""}</details>` : `<h3>Respuesta modelo</h3>${modelExplanation(answer)}`}
       <div class="actions">
         <button type="button" id="solved-prev" ${index===0?"disabled":""}>Anterior</button>
