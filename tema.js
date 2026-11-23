@@ -12,6 +12,22 @@ const estructurasMetamorficas = [
  "<strong>Estructura granoblástica.</strong> Los cristales encajan como piezas de un puzle y apuntan en distintas direcciones. Forman un <strong>mosaico de cristales</strong>. Se observa en la cuarcita y el mármol."
 ];
 
+const caminosCicloRocas = [
+ "<strong>Roca expuesta → sedimentos.</strong> La meteorización fragmenta o altera la roca. Los materiales se erosionan, se transportan y se depositan.",
+ "<strong>Sedimentos → roca sedimentaria.</strong> Los sedimentos se compactan y sus granos se unen. Esa transformación se llama <strong>diagénesis</strong>.",
+ "<strong>Roca → roca metamórfica.</strong> La presión o la temperatura transforman la roca en <strong>estado sólido</strong>. Es el <strong>metamorfismo</strong>.",
+ "<strong>Roca → magma → roca ígnea.</strong> Si la roca se funde, se forma <strong>magma</strong>. Al enfriarse y solidificarse, el magma forma una <strong>roca ígnea</strong>."
+];
+
+const serieRegionalCuaderno = [
+ "<strong>Recorrido.</strong> Arcilla → pizarra → filita → esquisto → gneis → granito de anatexia.",
+ "<strong>Ambiente sedimentario · arcilla.</strong> El recorrido empieza en un material arcilloso de origen sedimentario.",
+ "<strong>Bajo grado · pizarra y filita.</strong> Al aumentar la presión y la temperatura, se forman primero pizarra y luego filita.",
+ "<strong>Grado medio · esquisto.</strong> El esquisto puede contener <strong>granate</strong>, como indica el esquema.",
+ "<strong>Alto grado · gneis.</strong> El <strong>ojo de sapo</strong> es un ejemplo de gneis. Hasta el gneis, las transformaciones se producen en <strong>estado sólido</strong>.",
+ "<strong>Ambiente magmático · granito de anatexia.</strong> Si parte de la roca se funde, se produce la <strong>anatexia</strong> (fusión parcial). Al enfriarse y cristalizar, ese material fundido puede formar granito de anatexia."
+];
+
 const lecciones = [
 {
  id:"magma", titulo:"Procesos geológicos internos, magmatismo y volcanes", paginas:"288–291",
@@ -53,7 +69,7 @@ const lecciones = [
  ["5.1. Factores del metamorfismo","<strong>Presión litostática.</strong> Es la presión debida al peso de las capas superiores. Reduce la porosidad y puede aumentar la densidad. <strong>Temperatura.</strong> Favorece las reacciones entre minerales y facilita la deformación. <strong>Esfuerzos dirigidos.</strong> Se deben al empuje de las placas. Pueden comprimir y orientar minerales o triturar la roca en una falla. <strong>Presencia de agua.</strong> El agua lleva <strong>iones disueltos</strong>. Estos pueden reaccionar con los minerales de la roca."],
  ["5.2. Cambios físicos · cambios en el aspecto de la roca","El <strong>color</strong> puede variar al cambiar los minerales y pueden aparecer bandas o vetas. La <strong>densidad</strong> puede aumentar si disminuyen los poros. La <strong>tenacidad</strong> es la resistencia a romperse. Aumenta si los granos quedan más unidos. La <strong>textura</strong> puede cambiar cuando crecen los cristales. Ese crecimiento se llama <strong>blastesis</strong>. La <strong>estructura</strong> cambia cuando los minerales se orientan y forman láminas o bandas."],
  ["5.3. Tipos de metamorfismo",tiposMetamorfismo],
- ["Serie regional · del ambiente sedimentario al magmático","La serie empieza con la <strong>arcilla</strong> en el ambiente sedimentario. <strong>Arcilla → pizarra → filita → esquisto → gneis → granito de anatexia</strong>. Al aumentar la presión y la temperatura, aumenta el <strong>grado metamórfico</strong>. Desde la arcilla hasta el gneis, la transformación ocurre en estado sólido. Si parte de la roca se funde, se produce la <strong>anatexia</strong> o fusión parcial. Si ese material fundido se enfría y cristaliza, puede formar granito de anatexia, una roca ígnea."],
+ ["Serie regional · del ambiente sedimentario al magmático",serieRegionalCuaderno],
  ["6.1. Estructuras de las rocas metamórficas",estructurasMetamorficas],
  ["6.2. Tipos de rocas metamórficas · cómo reconocerlas","<strong>Pizarra.</strong> Se origina a partir de rocas arcillosas y se separa en láminas finas y paralelas. <strong>Esquisto.</strong> Presenta una foliación ondulada o irregular y suele brillar por sus micas. <strong>Gneis o neis.</strong> Muestra bandas claras y oscuras y puede tener cristales grandes de feldespato. <strong>Cuarcita.</strong> Procede de una arenisca rica en cuarzo y es muy dura. <strong>Mármol.</strong> Procede de una caliza y tiene estructura granoblástica. <strong>Corneana.</strong> Se forma por <strong>metamorfismo de contacto</strong>, cuando el magma calienta la roca que lo rodea. <strong>Brecha de falla y milonita.</strong> Pueden formarse por <strong>metamorfismo dinámico</strong>, cuando la roca se deforma o se tritura en una falla."]
  ],
@@ -67,7 +83,10 @@ const lecciones = [
  ["Qué es un silicato","Los <strong>silicatos</strong> son minerales con silicio y oxígeno como componentes fundamentales."],
  ["7. Los minerales de las rocas magmáticas y metamórficas · olivino y granates","El <strong>olivino</strong> es un silicato de magnesio y hierro. Es característico de la peridotita, una roca del manto, y también aparece en algunos basaltos. Es el ejemplo magmático que destacó Belén. Los <strong>granates</strong> forman un grupo de silicatos de composición variable. Pueden originarse en condiciones metamórficas de media y alta presión."],
  ["Del sedimento a la roca","Las rocas expuestas pueden originar <strong>sedimentos</strong> mediante meteorización, erosión, transporte y depósito. La <strong>diagénesis</strong> transforma esos sedimentos en rocas sedimentarias."],
- ["8. El ciclo de las rocas · cómo se transforman","Las rocas expuestas pueden volver a convertirse en sedimentos por meteorización, erosión, transporte y depósito. Por <strong>diagénesis</strong>, los sedimentos forman rocas sedimentarias. En profundidad, una roca que cambia en estado sólido da lugar a una roca metamórfica. Si se funde, se forma <strong>magma</strong>. Al enfriarse y solidificarse, el magma origina rocas ígneas. Cuando se eleva el terreno, las rocas pueden quedar expuestas otra vez. Así pueden volver a formar sedimentos y continuar el ciclo."]
+ ["8. El ciclo de las rocas · cómo se transforman",[
+  ...caminosCicloRocas,
+  "<strong>El ciclo continúa.</strong> Si una roca vuelve a quedar expuesta en la superficie, puede volver a dar sedimentos. Las rocas pueden seguir distintos caminos."
+ ]]
  ],
  esquema:["Roca expuesta","Sedimentos","Diagénesis","Roca sedimentaria"],
  ejemplo:"<strong>Granito</strong> → sedimentos mediante <strong>meteorización</strong> y <strong>erosión</strong> → <strong>arenisca</strong> mediante <strong>diagénesis</strong> → <strong>cuarcita</strong> mediante <strong>metamorfismo</strong>."

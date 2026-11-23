@@ -169,7 +169,6 @@ const visual = {
   <figcaption><strong>Corte de un volcán.</strong> El cono rodea el cráter en la parte superior. Debajo, la chimenea conecta la abertura con la cámara magmática.</figcaption></figure>`,
   meta: `<figure><div class="rock-samples" aria-hidden="true"><span class="foliation"></span><span class="mosaic"></span></div>
   <figcaption><strong>Dos estructuras.</strong> Izquierda, disposición en láminas o bandas (foliación). Derecha, mosaico de granos sin orientación preferente (granoblástica).</figcaption></figure>`,
-  ciclo: `<ul class="cycle-paths"><li><strong>Cualquier roca expuesta</strong> → meteorización y erosión → sedimentos.</li><li><strong>Roca en el interior</strong> → metamorfismo → roca metamórfica.</li><li><strong>Roca que se funde</strong> → magma → cristalización → roca ígnea.</li></ul>`
 };
 const examExternal = `<div class="grid"><section class="card"><h2>Qué entra · Tema 14</h2><ul>
 <li><strong>Meteorización.</strong> Define la meteorización y estudia los procesos mecánicos, químicos y biológicos. La profesora puede dar el nombre de un mecanismo, por ejemplo termoclastia, y pedir que lo expliques, o dar sus características y pedir que lo identifiques.</li>
@@ -264,7 +263,7 @@ const studyQuestions = {
   ],
   meta: [
     ["Define metamorfismo. Nombra los factores y explica un cambio que pueda producir cada uno.","Es la transformación de los minerales, la textura o la estructura de una roca que permanece en estado sólido. La presión litostática se debe al peso de las capas superiores. Puede reducir los huecos de la roca. La temperatura facilita las reacciones entre los minerales. Los esfuerzos dirigidos pueden cambiar la orientación de los minerales o triturar la roca en una falla. El agua lleva iones disueltos que pueden reaccionar con los minerales.",true],
-    ["Ordena la serie regional desde la arcilla. Después explica qué cambia al aumentar la presión y la temperatura, y en qué momento empieza a fundirse parte de la roca.","Arcilla → pizarra → filita → esquisto → gneis → granito de anatexia. A medida que suben la presión y la temperatura, aumenta el grado metamórfico. Hasta el gneis, la roca cambia en estado sólido. La anatexia empieza cuando se funde parte de la roca. Si ese material fundido se enfría y cristaliza, puede formar granito de anatexia, una roca ígnea."],
+    ["Ordena la serie regional desde la arcilla. Indica los grados de metamorfismo y explica cuándo empieza a fundirse parte de la roca.",serieRegionalCuaderno,true],
     ["Compara foliación y estructura granoblástica. Da un ejemplo de roca para cada una.",estructurasMetamorficas,true],
     ["Identifica tres rocas foliadas. A: se separa en láminas finas y paralelas. B: tiene foliación ondulada y brillo de micas. C: tiene bandas claras y oscuras.","A. Pizarra. B. Esquisto. C. Gneis o neis. Las tres tienen foliación, pero se distinguen por la forma en que se organizan sus minerales.",true],
     ["Las dos muestras tienen estructura granoblástica. Una procede de una arenisca rica en cuarzo. La otra procede de una caliza. ¿Qué roca es cada una?","La primera es cuarcita y la segunda es mármol. Como ambas pueden presentar un mosaico de cristales, la pista decisiva en esta pregunta es la roca de origen.",true],
@@ -276,7 +275,7 @@ const studyQuestions = {
       "<strong>Mineral magmático.</strong> El <strong>olivino</strong> puede formarse cuando cristaliza el magma.",
       "<strong>Mineral metamórfico.</strong> El <strong>granate</strong> puede formarse cuando una roca se transforma por metamorfismo."
     ],true],
-    ["¿Qué procesos del ciclo forman rocas sedimentarias, metamórficas e ígneas?","Los sedimentos forman rocas sedimentarias por diagénesis. Las rocas que cambian en estado sólido forman rocas metamórficas por metamorfismo. Si una roca se funde se forma magma, y cuando este se enfría y solidifica se forma una roca ígnea.",true],
+    ["Explica el ciclo de las rocas. ¿Cómo se forman los sedimentos y las rocas sedimentarias, metamórficas e ígneas?",caminosCicloRocas,true],
     ["Construye un recorrido del ciclo que incluya granito, sedimentos, arenisca y cuarcita.","El granito expuesto se meteoriza y los materiales se movilizan, se transportan y se depositan. La diagénesis puede formar arenisca. Si es rica en cuarzo, el metamorfismo puede transformarla en cuarcita."]
   ],
   esfuerzos: [
