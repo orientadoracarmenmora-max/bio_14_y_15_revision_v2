@@ -1065,18 +1065,20 @@ const extraQuestions = {
 const preguntasRocasSedimentarias = [
   ["Formación y clasificación",[
     ["¿Cómo se transforma un sedimento en una roca sedimentaria?","El sedimento se transforma en roca sedimentaria mediante la diagénesis o litificación. Primero, el enterramiento: se acumulan nuevas capas de sedimentos sobre las anteriores. Después, la compactación: el peso de las capas superiores aproxima los clastos y reduce los huecos entre ellos. Por último, la cementación: precipitan minerales en los huecos que quedan y actúan como un cemento que une los clastos. Así queda consolidada la roca sedimentaria."],
-    ["¿En qué se diferencian las rocas detríticas, las no detríticas y las mixtas?",[origenRocasDetriticas,"Las no detríticas se forman a partir de sustancias disueltas en el agua que se convierten en sólidos, o de materia orgánica. Las mixtas combinan minerales formados a partir de sustancias disueltas y clastos de otras rocas."]]
+    ["¿En qué se diferencian las rocas detríticas, las no detríticas y las mixtas?",["<u><strong>Rocas detríticas</strong></u>",origenRocasDetriticas,"<u><strong>Rocas no detríticas</strong></u>","Se forman a partir de sustancias disueltas en el agua que se convierten en sólidos, o de materia orgánica.","<u><strong>Rocas mixtas</strong></u>","Combinan minerales formados a partir de sustancias disueltas y clastos de otras rocas."]]
   ]],
   ["Te dan el nombre · explica las características",[
     ["¿Cómo describirías una pudinga y una brecha?",[
-      "Son <strong>conglomerados (rocas detríticas)</strong> porque predominan los clastos de <strong>más de 2 mm</strong>.",
+      "<u><strong>Rocas detríticas</strong></u>",
+      "Son <strong>conglomerados</strong> porque predominan los clastos de <strong>más de 2 mm</strong>.",
       "<strong>Pudinga.</strong> Tiene cantos <strong>redondeados</strong>.",
       "<strong>Brecha.</strong> Tiene fragmentos <strong>angulosos</strong>."
     ],true],
-    ["¿Qué tamaño tienen los granos de la arenisca? ¿Y los del limo y la arcilla?",tiposRocasDetriticas.slice(3)],
-    ["¿En qué se diferencian una caliza y una dolomía por su composición?",["Ambas son <strong>rocas carbonatadas</strong>.",...composicionCarbonatadas]],
-    ["¿Cómo se forman las rocas evaporíticas? Indica el mineral principal de los yesos y da un ejemplo de mineral de las sales.",rocasEvaporiticas],
+    ["¿Qué tamaño tienen los granos de la arenisca? ¿Y los del limo y la arcilla?",["<u><strong>Rocas detríticas</strong></u>",...tiposRocasDetriticas.slice(3)]],
+    ["¿En qué se diferencian una caliza y una dolomía por su composición?",["<u><strong>Rocas no detríticas · carbonatadas</strong></u>","Ambas son <strong>rocas carbonatadas</strong>.",...composicionCarbonatadas]],
+    ["¿Cómo se forman las rocas evaporíticas? Indica el mineral principal de los yesos y da un ejemplo de mineral de las sales.",["<u><strong>Rocas no detríticas · evaporíticas</strong></u>",...rocasEvaporiticas]],
     ["¿Cómo distinguirías una muestra de turba de una de antracita? ¿De qué materia orgánica procede el petróleo?",[
+      "<u><strong>Rocas no detríticas · orgánicas</strong></u>",
       "La <strong>turba</strong>, la <strong>antracita</strong> y el <strong>petróleo</strong> se estudian en el grupo de las <strong>rocas orgánicas</strong>.",
       "<strong>Turba.</strong> Es parda, conserva restos vegetales y contiene entre un 45 % y un 65 % de carbono.",
       "<strong>Antracita.</strong> Es gris, tiene brillo metálico y contiene entre un 90 % y un 95 % de carbono.",
@@ -1084,9 +1086,9 @@ const preguntasRocasSedimentarias = [
     ]]
   ]],
   ["Te dan las características · identifica la roca",[
-    ["Compara dos rocas detríticas. Una tiene cantos redondeados de 8 mm unidos por un cemento. La otra está formada por granos cementados de 0,5 mm. Identifícalas y justifica la clasificación.","La primera es una pudinga. Los cantos superan los 2 mm y están unidos por un cemento, así que es un conglomerado. Los cantos redondeados permiten distinguirla de una brecha. La segunda es una arenisca porque los 0,5 mm están dentro del intervalo del tamaño arena, entre 1/16 mm y 2 mm.",true],
-    ["Una muestra es parda y conserva restos vegetales. Otra es gris y tiene brillo metálico. ¿Qué dos carbones son?","La primera muestra es turba. Se reconoce por el color pardo y los restos vegetales. La segunda es antracita. Se reconoce por el color gris y el brillo metálico."],
-    ["¿Qué roca mixta está formada por carbonato de calcio y una parte importante de limo o arcilla?","Es una marga."]
+    ["Compara dos rocas detríticas. Una tiene cantos redondeados de 8 mm unidos por un cemento. La otra está formada por granos cementados de 0,5 mm. Identifícalas y justifica la clasificación.",["<u><strong>Rocas detríticas</strong></u>","La primera es una pudinga. Los cantos superan los 2 mm y están unidos por un cemento, así que es un conglomerado. Los cantos redondeados permiten distinguirla de una brecha. La segunda es una arenisca porque los 0,5 mm están dentro del intervalo del tamaño arena, entre 1/16 mm y 2 mm."],true],
+    ["Una muestra es parda y conserva restos vegetales. Otra es gris y tiene brillo metálico. ¿Qué dos carbones son?",["<u><strong>Rocas no detríticas · orgánicas</strong></u>","La primera muestra es turba. Se reconoce por el color pardo y los restos vegetales. La segunda es antracita. Se reconoce por el color gris y el brillo metálico."]],
+    ["¿Qué roca mixta está formada por carbonato de calcio y una parte importante de limo o arcilla?",["<u><strong>Rocas mixtas</strong></u>","Es una <strong>marga</strong>."]]
   ]],
   ["Minerales · repaso breve",[
     ["Relaciona los cinco minerales de repaso con una característica.","Cuarzo: es resistente y frecuente en areniscas. Minerales de arcilla: la caolinita es un ejemplo. Yeso: es un sulfato de calcio. Halita: es cloruro de sodio. Calcita: es carbonato de calcio y es el mineral principal de las calizas."]
