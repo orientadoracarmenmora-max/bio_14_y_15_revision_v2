@@ -169,7 +169,6 @@ const visual = {
   <figcaption><strong>Corte de un volcán.</strong> El cono rodea el cráter en la parte superior. Debajo, la chimenea conecta la abertura con la cámara magmática.</figcaption></figure>`,
   meta: `<figure><div class="rock-samples" aria-hidden="true"><span class="foliation"></span><span class="mosaic"></span></div>
   <figcaption><strong>Dos estructuras.</strong> Izquierda, disposición en láminas o bandas (foliación). Derecha, mosaico de granos sin orientación preferente (granoblástica).</figcaption></figure>`,
-  ciclo: `<ul class="cycle-paths"><li><strong>Cualquier roca expuesta</strong> → meteorización y erosión → sedimentos.</li><li><strong>Roca en el interior</strong> → metamorfismo → roca metamórfica.</li><li><strong>Roca que se funde</strong> → magma → cristalización → roca ígnea.</li></ul>`
 };
 const examExternal = `<div class="grid"><section class="card"><h2>Qué entra · Tema 14</h2><ul>
 <li><strong>Meteorización.</strong> Define la meteorización y estudia los procesos mecánicos, químicos y biológicos. La profesora puede dar el nombre de un mecanismo, por ejemplo termoclastia, y pedir que lo expliques, o dar sus características y pedir que lo identifiques.</li>
@@ -185,8 +184,8 @@ const exam = `<div class="notice"><h2>Pregunta segura del tema 15</h2><p>Explica
 <li><strong>Vulcanismo.</strong> Explica cómo se produce una erupción, cuáles son sus productos y cómo influyen la composición, la temperatura, los gases disueltos y el lugar de la erupción. Identifica la caldera, la cámara magmática, la chimenea, el cono y el cráter.</li>
 <li><strong>Rocas ígneas.</strong> Relaciona el enfriamiento con las rocas volcánicas, plutónicas y filonianas. Distingue textura y estructura. Repasa fanerítica o fanerocristalina, microcristalina, vítrea, porfídica y vacuolar. Practica describir e identificar las rocas plutónicas y volcánicas.</li>
 <li><strong>Metamorfismo.</strong> Define el proceso, explica sus factores y los cambios de color, densidad, tenacidad, textura y estructura. Distingue metamorfismo dinámico, térmico o de contacto, y regional.</li>
-<li><strong>Rocas metamórficas.</strong> Reconoce la foliación y la estructura granoblástica. Identifica pizarra, esquisto, gneis, cuarcita y mármol. Asocia la corneana al metamorfismo de contacto y la milonita al dinámico.</li>
-<li><strong>Minerales y ciclo de las rocas.</strong> Define los silicatos. Repasa el olivino como ejemplo magmático y los granates como ejemplo metamórfico. Estudia el esquema simplificado del ciclo.</li>
+<li><strong>Rocas metamórficas.</strong> Explica cómo la <strong>presión</strong> condiciona la <strong>foliación</strong> y reconoce la <strong>estructura granoblástica</strong>. Identifica pizarra, esquisto, gneis, cuarcita y mármol. Asocia la <strong>corneana</strong> al metamorfismo de contacto y la <strong>brecha de falla o la milonita</strong> al dinámico.</li>
+<li><strong>Minerales y ciclo de las rocas.</strong> Define los <strong>silicatos</strong>. Da un ejemplo <strong>magmático</strong> (olivino) y otro <strong>metamórfico</strong> (granate). Estudia el esquema simplificado del ciclo.</li>
 <li><strong>Esfuerzos.</strong> Define <strong>pliegue</strong> y <strong>falla</strong> y explica sus elementos principales.</li></ul></section>
 <section class="card"><h2>Qué se excluye</h2><ul>
 <li>Tipos de actividad volcánica hawaiana, estromboliana y peleana, y el recuadro azul.</li>
@@ -265,14 +264,18 @@ const studyQuestions = {
   meta: [
     ["Define metamorfismo. Nombra los factores y explica un cambio que pueda producir cada uno.","Es la transformación de los minerales, la textura o la estructura de una roca que permanece en estado sólido. La presión litostática se debe al peso de las capas superiores. Puede reducir los huecos de la roca. La temperatura facilita las reacciones entre los minerales. Los esfuerzos dirigidos pueden cambiar la orientación de los minerales o triturar la roca en una falla. El agua lleva iones disueltos que pueden reaccionar con los minerales.",true],
     ["Ordena la serie regional desde la arcilla. Después explica qué cambia al aumentar la presión y la temperatura, y en qué momento empieza a fundirse parte de la roca.","Arcilla → pizarra → filita → esquisto → gneis → granito de anatexia. A medida que suben la presión y la temperatura, aumenta el grado metamórfico. Hasta el gneis, la roca cambia en estado sólido. La anatexia empieza cuando se funde parte de la roca. Si ese material fundido se enfría y cristaliza, puede formar granito de anatexia, una roca ígnea."],
-    ["Compara foliación y estructura granoblástica. Da un ejemplo de roca para cada una.","En la foliación, los minerales se orientan en planos y se ven láminas o bandas, como en el esquisto. En la estructura granoblástica, los cristales encajan como piezas de un puzle y apuntan en distintas direcciones. Dos ejemplos son la cuarcita y el mármol.",true],
+    ["Compara foliación y estructura granoblástica. Da un ejemplo de roca para cada una.",estructurasMetamorficas,true],
     ["Identifica tres rocas foliadas. A: se separa en láminas finas y paralelas. B: tiene foliación ondulada y brillo de micas. C: tiene bandas claras y oscuras.","A. Pizarra. B. Esquisto. C. Gneis o neis. Las tres tienen foliación, pero se distinguen por la forma en que se organizan sus minerales.",true],
     ["Las dos muestras tienen estructura granoblástica. Una procede de una arenisca rica en cuarzo. La otra procede de una caliza. ¿Qué roca es cada una?","La primera es cuarcita y la segunda es mármol. Como ambas pueden presentar un mosaico de cristales, la pista decisiva en esta pregunta es la roca de origen.",true],
     ["Una muestra procede de la roca que rodea una intrusión. La otra se deformó mucho en una falla. Para cada muestra, indica qué tipo de metamorfismo ocurrió y qué roca pudo formarse.","Junto a la intrusión, el calor transforma la roca encajante por metamorfismo de contacto y puede originar corneana. En la zona de falla, la deformación intensa se asocia al metamorfismo dinámico y puede originar milonita.",true]
   ],
   ciclo: [
-    ["¿Qué caracteriza a los silicatos? Pon el ejemplo ígneo y el metamórfico destacados en clase.","El silicio y el oxígeno son componentes fundamentales. El olivino aparece en rocas magmáticas. Los granates pueden aparecer en rocas metamórficas.",true],
-    ["¿Qué procesos del ciclo forman rocas sedimentarias, metamórficas e ígneas?","Los sedimentos forman rocas sedimentarias por diagénesis. Las rocas que cambian en estado sólido forman rocas metamórficas por metamorfismo. Si una roca se funde se forma magma, y cuando este se enfría y solidifica se forma una roca ígnea.",true],
+    ["¿Qué son los silicatos? Da un ejemplo de mineral magmático y otro de mineral metamórfico.",[
+      "<strong>Silicatos.</strong> Son minerales que tienen <strong>silicio y oxígeno</strong> como elementos fundamentales.",
+      "<strong>Mineral magmático.</strong> El <strong>olivino</strong> puede formarse cuando cristaliza el magma.",
+      "<strong>Mineral metamórfico.</strong> El <strong>granate</strong> puede formarse cuando una roca se transforma por metamorfismo."
+    ],true],
+    ["Explica el ciclo de las rocas. ¿Cómo se forman los sedimentos y las rocas sedimentarias, metamórficas e ígneas?",caminosCicloRocas,true],
     ["Construye un recorrido del ciclo que incluya granito, sedimentos, arenisca y cuarcita.","El granito expuesto se meteoriza y los materiales se movilizan, se transportan y se depositan. La diagénesis puede formar arenisca. Si es rica en cuarzo, el metamorfismo puede transformarla en cuarcita."]
   ],
   esfuerzos: [
@@ -1144,7 +1147,17 @@ function render(focus) {
   <a class="cover-link external" href="#externos">Tema 14</a>
   <a class="cover-link internal" href="#internos">Tema 15</a>
   </div>` : `<h1 tabindex="-1">${title}</h1>`;
-  if (page === "examen") screen.innerHTML += `<h2>Tema 14 · Procesos externos</h2>${examExternal}<h2 class="section-title">Tema 15 · Procesos internos</h2>${exam}`;
+  if (page === "examen") {
+    screen.innerHTML += `<p>Según las indicaciones del audio. La serie regional es la pregunta anunciada como segura.</p><nav class="actions" aria-label="Ir a un tema"><a class="button" href="#alcance-tema-14" data-exam-jump>Tema 14</a><a class="button" href="#alcance-tema-15" data-exam-jump>Tema 15</a></nav><h2 id="alcance-tema-14" tabindex="-1">Tema 14 · Procesos externos</h2>${examExternal}<h2 id="alcance-tema-15" class="section-title" tabindex="-1">Tema 15 · Procesos internos</h2>${exam}`;
+    screen.querySelectorAll("[data-exam-jump]").forEach(link => {
+      link.onclick = event => {
+        event.preventDefault();
+        const heading = $(link.hash.slice(1));
+        heading.focus();
+        heading.scrollIntoView({block:"start"});
+      };
+    });
+  }
   if (page === "externos" || page === "internos") {
     const group = page === "externos" ? externos : lecciones;
     screen.innerHTML += `<p class="kicker">Tema ${page==="externos"?14:15}</p><div class="grid">${group.map(item=>`<section class="card"><h2><a href="#${item.id}">${item.titulo}</a></h2><div class="explanation">${explanation(item.idea)}</div></section>`).join("")}</div>`;
