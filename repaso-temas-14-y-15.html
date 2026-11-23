@@ -1407,12 +1407,19 @@ function renderFinalStudy() {
 }
 
 function renderSolvedExam(finalStudy = false) {
-  const profileCards = perfilesConCuatroHorizontes.map(profile => ({
+  const perfilesRepaso = [
+    perfilesConCuatroHorizontes[1],
+    perfilesConCuatroHorizontes[0],
+    ...perfilesEntrenamiento.filter(profile=>profile.foto)
+  ];
+  const profileCards = perfilesRepaso.map(profile => ({
     topic: 14, title: profile.titulo, destacada:true,
-    question: "Identifica qué horizonte señala cada una de las cuatro marcas.",
+    question: "Escribe el nombre del horizonte que señala cada letra.",
     image: trainingProfile(profile),
-    answer: profile.correccion.map(([mark,horizon,why]) =>
-      `<strong>Marca ${mark} · Horizonte ${horizon}.</strong> ${why}`)
+    answer: [
+      ...profile.correccion.map(([mark,horizon,why])=>`<strong>Marca ${mark} · Horizonte ${horizon}.</strong> ${why}`),
+      ...(profile.nota ? [profile.nota] : [])
+    ]
   }));
   const withImage = {
     "Mira el bloque diagrama.": tectonicStudyFigure,
@@ -1477,7 +1484,14 @@ function renderSolvedExam(finalStudy = false) {
       ]),
       ...toCards("Horizontes del suelo",studyQuestions.suelo.slice(3,4)),
       ...profileCards,
-      ...toCards("Propiedades del suelo y fertilidad",studyQuestions.suelo.slice(4,6)),
+      ...toCards("Propiedades del suelo y fertilidad",[
+        ["Define textura, porosidad y permeabilidad del suelo.",propiedadesSuelo],
+        ["¿Puede un suelo arcilloso tener mucha porosidad y dejar pasar el agua lentamente?",[
+          "<strong>Sí.</strong> Muchos poros pequeños pueden ocupar una parte importante del suelo y retener agua.",
+          "El agua circula lentamente por esos poros. Por eso el suelo puede ser <strong>poco permeable</strong>."
+        ]],
+        studyQuestions.suelo[5]
+      ]),
       ...toCards("Tipos de suelo · Caliche y suelo rocoso",studyQuestions.suelo.slice(6,10)),
       ...toCards("Erosión, detrito y sedimentación",[extraQuestions.sedimentos[0],studyQuestions.sedimentos[1]]),
       ...toCards("Tipos de transporte de sedimentos",studyQuestions.sedimentos.slice(2,4)),
@@ -1965,8 +1979,8 @@ const perfilesConCuatroHorizontes = [
 function trainingProfile(profile) {
   if (profile.foto) return `<figure class="book-figure photo-exercise">
     <div class="numbered-photo"><img src="https://orientadoracarmenmora-max.github.io/bio_14_y_15_revision_v2/14-perfil-${profile.foto}.webp" alt="${profile.alt}">
-    ${profile.marcas.map(([tag,y,x])=>`<span aria-hidden="true" style="--x:${x}%;--y:${y}%">${tag}</span>`).join("")}</div>
-    <figcaption>Fotografía del libro</figcaption></figure>`;
+    ${profile.marcas.map(([tag,y,x=58])=>`<span aria-hidden="true" style="--x:${x}%;--y:${y}%">${tag}</span>`).join("")}</div>
+    <figcaption>${profile.credito || "Fotografía del libro"}</figcaption></figure>`;
   const textures = ["roots","dots","gravel"];
   return `<figure class="profile-training-drawing"><div class="profile-training-column" role="img" aria-label="${profile.capas.map(([tag,,,alt])=>tag+". "+alt).join(" ")}">
     ${profile.capas.map(([tag,color,depth],i)=>`<div aria-hidden="true" class="soil-band ${textures[i===profile.capas.length-1 ? 2 : Math.min(i,1)]}" style="--soil:${color};--depth:${depth}"><b>${tag}</b></div>`).join("")}
