@@ -375,6 +375,8 @@ const propiedadesSuelo = [
  "La <strong>porosidad</strong> es el porcentaje del suelo ocupado por huecos que pueden contener aire o agua.",
  "La <strong>permeabilidad</strong> es la facilidad con que el agua circula por esos huecos."
 ];
+const tamanosTexturaSuelo = "Tamaños de referencia del libro: <strong>arena, 2 mm</strong> · <strong>limo, 0,05 mm</strong> · <strong>arcilla, 0,002 mm</strong>.";
+const comparacionPorosSuelo = "En el <strong>suelo arenoso</strong> los poros son <strong>más grandes</strong>. En el <strong>suelo arcilloso</strong> son <strong>más pequeños</strong>.";
 const ejemploSueloArcilloso = "Un suelo muy arcilloso puede tener muchos poros pequeños y retener mucha agua. El agua circula lentamente por esos poros, así que el suelo es poco permeable.";
 const fertilidadSuelo = [
  "Un suelo es más <strong>fértil</strong> si favorece el crecimiento de las plantas.",
@@ -1511,7 +1513,15 @@ function renderSolvedExam(finalStudy = false) {
       ...toCards("Horizontes del suelo",studyQuestions.suelo.slice(3,4)),
       ...profileCards,
       ...toCards("Propiedades del suelo y fertilidad",[
-        studyQuestions.suelo[4],
+        ["¿Cuáles son las tres propiedades del suelo? Nómbralas y define cada una.",[
+          "Las tres propiedades son la <strong>textura</strong>, la <strong>porosidad</strong> y la <strong>permeabilidad</strong>.",
+          propiedadesSuelo[0], tamanosTexturaSuelo,
+          propiedadesSuelo[1], comparacionPorosSuelo,
+          propiedadesSuelo[2]
+        ]],
+        ["¿Qué indica la textura del suelo?",[propiedadesSuelo[0],tamanosTexturaSuelo]],
+        ["¿Qué es la porosidad? ¿Cómo son los poros de un suelo arenoso y los de uno arcilloso?",[propiedadesSuelo[1],comparacionPorosSuelo]],
+        ["¿Qué es la permeabilidad del suelo?",[propiedadesSuelo[2]]],
         ["Si nos fijamos en cuánto espacio del suelo ocupan los huecos, ¿qué propiedad estamos describiendo?",[propiedadesSuelo[1]]],
         ["Si nos fijamos en la facilidad con la que el agua atraviesa un suelo, ¿qué propiedad estamos describiendo?",[propiedadesSuelo[2]]],
         ["En tres muestras predominan partículas de 2 mm, 0,002 mm y 0,05 mm, respectivamente. Según las medidas de referencia del libro, ¿cuál es arenosa, cuál arcillosa y cuál limosa?",[
