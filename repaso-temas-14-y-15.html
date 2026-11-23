@@ -1064,7 +1064,12 @@ const preguntasRocasSedimentarias = [
     ["¿Qué tamaño tienen los granos de la arenisca? ¿Y los del limo y la arcilla?",tiposRocasDetriticas.slice(3)],
     ["¿En qué se diferencian una caliza y una dolomía por su composición?",["Ambas son <strong>rocas carbonatadas</strong>.",...composicionCarbonatadas]],
     ["¿Cómo se forman las rocas evaporíticas? Indica el mineral principal de los yesos y da un ejemplo de mineral de las sales.",rocasEvaporiticas],
-    ["¿Cómo distinguirías una muestra de turba de una de antracita? ¿De qué materia orgánica procede el petróleo?","La turba es parda, conserva restos vegetales y contiene entre un 45 % y un 65 % de carbono. La antracita es gris, tiene brillo metálico y contiene entre un 90 % y un 95 % de carbono. El petróleo es líquido y procede de materia orgánica de microorganismos marinos enterrada en sedimentos arcillosos sin oxígeno."]
+    ["¿Cómo distinguirías una muestra de turba de una de antracita? ¿De qué materia orgánica procede el petróleo?",[
+      "La <strong>turba</strong>, la <strong>antracita</strong> y el <strong>petróleo</strong> se estudian en el grupo de las <strong>rocas orgánicas</strong>.",
+      "<strong>Turba.</strong> Es parda, conserva restos vegetales y contiene entre un 45 % y un 65 % de carbono.",
+      "<strong>Antracita.</strong> Es gris, tiene brillo metálico y contiene entre un 90 % y un 95 % de carbono.",
+      "<strong>Petróleo.</strong> Es líquido. Procede de materia orgánica de microorganismos marinos enterrada en sedimentos arcillosos, en un ambiente sin oxígeno."
+    ]]
   ]],
   ["Te dan las características · identifica la roca",[
     ["Compara dos rocas detríticas. Una tiene cantos redondeados de 8 mm unidos por un cemento. La otra está formada por granos cementados de 0,5 mm. Identifícalas y justifica la clasificación.","La primera es una pudinga. Los cantos superan los 2 mm y están unidos por un cemento, así que es un conglomerado. Los cantos redondeados permiten distinguirla de una brecha. La segunda es una arenisca porque los 0,5 mm están dentro del intervalo del tamaño arena, entre 1/16 mm y 2 mm.",true],
@@ -1519,7 +1524,7 @@ function renderSolvedExam(finalStudy = false) {
         return toCards(groupIndex === 3 ? format : `Rocas sedimentarias · ${format}`,entries)
           .map((card,i)=>({
             ...card,
-            imageInAnswerOnly:(groupIndex===0 && i===1) || (groupIndex===1 && i<=2),
+            imageInAnswerOnly:(groupIndex===0 && i===1) || groupIndex===1,
             image:imagesByGroup[groupIndex][i].map(key=>figures({id:"sedimentarias"},key)).join("") +
               (groupIndex===1 && i===0 ? `<figure class="book-figure"><img src="https://live.staticflickr.com/8365/8512840471_eb6cd4f6ca_o.jpg" alt="Brecha sedimentaria con fragmentos claros de bordes angulosos" loading="lazy"><figcaption><strong>Brecha sedimentaria.</strong> Fragmentos angulosos. <a href="https://commons.wikimedia.org/wiki/File:Breccia.jpg" target="_blank" rel="noopener">Foto de James St. John</a> · <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>.</figcaption></figure>` : "")
           }));
