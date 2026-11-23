@@ -114,12 +114,12 @@ textarea{display:block;width:100%;margin:.3rem 0 .85rem;padding:.65rem;backgroun
 <body>
 <a class="skip" href="#contenido">Saltar al contenido</a>
 <header class="top"><a href="#contenido" class="brand">Biología y Geología</a>
-<details class="settings"><summary>Accesibilidad y lectura</summary><div class="controls">
+<details class="settings"><summary>Accesibilidad</summary><div class="controls">
 <div role="group" aria-label="Accesibilidad">
 <div><label for="size">Letra</label><select id="size"><option value="100">Normal</option><option value="120">Grande</option><option value="145">Muy grande</option></select></div>
 <label><input type="checkbox" id="contrast"> Alto contraste</label>
-<div><label for="voice">Voz</label><select id="voice"><option value="">Automática (Google o voz del dispositivo)</option></select></div>
-<div><label for="rate">Velocidad</label><select id="rate"><option value=".75">0,75×</option><option value=".9">0,9×</option><option selected value="1">1×</option><option value="1.15">1,15×</option></select></div>
+<div hidden><label for="voice">Voz</label><select id="voice"><option value="">Automática (Google o voz del dispositivo)</option></select></div>
+<div hidden><label for="rate">Velocidad</label><select id="rate"><option value=".75">0,75×</option><option value=".9">0,9×</option><option selected value="1">1×</option><option value="1.15">1,15×</option></select></div>
 </div>
 </div></details></header>
 <div class="barra-puntero" id="barra-puntero" hidden>
@@ -132,7 +132,7 @@ textarea{display:block;width:100%;margin:.3rem 0 .85rem;padding:.65rem;backgroun
 <canvas id="capa-puntero" aria-hidden="true" hidden></canvas>
 <div class="layout study-only">
 <main id="contenido" tabindex="-1">
-<div class="tools"><button id="speak" class="speaker" aria-pressed="false" aria-label="Leer pantalla en voz alta" title="Leer pantalla en voz alta"><span aria-hidden="true">🔊</span></button><button id="stop">Detener lectura</button><button id="print" hidden>Imprimir</button><span id="speech-status" role="status"></span></div>
+<div hidden><button id="speak" class="speaker" aria-pressed="false" aria-label="Leer pantalla en voz alta" title="Leer pantalla en voz alta"><span aria-hidden="true">🔊</span></button><button id="stop">Detener lectura</button><button id="print" hidden>Imprimir</button><span id="speech-status" role="status"></span></div>
 <div id="screen"></div>
 <div id="printout"></div>
 <noscript>Activa JavaScript para abrir las explicaciones y realizar los ejercicios.</noscript>
@@ -1424,8 +1424,49 @@ function renderSolvedExam(finalStudy = false) {
     const toCards = (title, entries) => entries.map(([question,answer])=>({title,question,answer}));
     return [
       ...toCards("Meteorización · definición y tipos",studyQuestions.meteorizacion),
-      ...[["Mecánica",preguntasMecanica],["Química",preguntasQuimica],["Biológica",preguntasBiologica]]
-        .flatMap(([type,groups])=>groups.flatMap(([format,entries])=>toCards(`Meteorización ${type.toLowerCase()} · ${format}`,entries))),
+      ...[
+        {tipo:"mecánica",grupos:preguntasMecanica,
+         lista:"Los tipos estudiados son <strong>gelifracción, descompresión, abrasión y termoclastia</strong>.",
+         nombres:["Termoclastia","Gelifracción","Descompresión","Abrasión"],casos:[2,3,1,0]},
+        {tipo:"química",grupos:preguntasQuimica,
+         lista:"Los tipos estudiados son <strong>oxidación, disolución, carbonatación e hidrólisis</strong>.",
+         nombres:["Oxidación","Disolución","Carbonatación","Hidrólisis"],casos:[2,3,0,1]}
+      ].flatMap(({tipo,grupos,lista,nombres,casos})=>{
+        const directas = grupos[0][1];
+        const ejemplos = grupos[1][1];
+        return [
+          ...toCards(`Meteorización ${tipo}`,[[`¿Qué tipos de meteorización ${tipo} hay?`,[lista]]]),
+          ...directas.flatMap(([enunciado,explicacion],i)=>{
+            const [pregunta] = ejemplos[casos[i]];
+            const answer = [`Es <strong>meteorización ${tipo}</strong>. El mecanismo se llama <strong>${nombres[i].toLowerCase()}</strong>.`,explicacion];
+            return toCards("Meteorización",[
+              [enunciado,answer],
+              [pregunta.split("¿")[0].trim()+" ¿Qué tipo de meteorización es? ¿Qué mecanismo actúa?",answer]
+            ]);
+          })
+        ];
+      }),
+      ...toCards("Meteorización biológica",[
+        ["¿Qué tipos de meteorización biológica hay?",[
+          "<strong>Por acción mecánica.</strong> Los seres vivos pueden fragmentar la roca.",
+          "<strong>Por acción química.</strong> Los seres vivos pueden favorecer la alteración de sus minerales."
+        ]],
+        preguntasBiologica[0][1][0]
+      ]),
+      ...toCards("Meteorización",[
+        ["¿Cómo favorece la meteorización la cubierta herbácea? ¿De qué tipo es?",[
+          "Es <strong>meteorización biológica por acción química</strong>.",
+          preguntasBiologica[0][1][1][1]
+        ]],
+        [preguntasBiologica[1][1][0][0],[
+          "Es <strong>meteorización biológica por acción mecánica</strong>.",
+          raicesMeteorizacion
+        ]],
+        ...preguntasBiologica[1][1].slice(1).map(([question,answer])=>[
+          question+" ¿De qué tipo de meteorización se trata?",
+          ["Es <strong>meteorización biológica por acción química</strong>.",answer]
+        ])
+      ]),
       ...toCards("Formación del suelo · factores",studyQuestions.suelo.slice(0,1)),
       ...toCards("Horizontes del suelo",studyQuestions.suelo.slice(3,4)),
       ...profileCards,
@@ -1602,7 +1643,7 @@ function renderSolvedExam(finalStudy = false) {
     const {title,question,image,answer,resource} = visible[index];
     panel.innerHTML = `<section class="block">
       <p class="muted">Pregunta ${index+1} de ${visible.length}</p>
-      <div class="block-head"><h2 tabindex="-1">${title}</h2>${speaker("Escuchar la pregunta y la respuesta","data-read")}</div>
+      <h2 tabindex="-1">${title}</h2>
       <p><strong>${question}</strong></p>${image || ""}${resource || ""}
       ${finalStudy ? `<details><summary>Ver respuesta modelo</summary>${modelExplanation(answer)}${image || ""}</details>` : `<h3>Respuesta modelo</h3>${modelExplanation(answer)}`}
       <div class="actions">
