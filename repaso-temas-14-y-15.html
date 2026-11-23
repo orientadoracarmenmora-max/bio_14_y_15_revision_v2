@@ -1467,7 +1467,14 @@ function renderSolvedExam(finalStudy = false) {
           ["Es <strong>meteorización biológica por acción química</strong>.",answer]
         ])
       ]),
-      ...toCards("Formación del suelo · factores",studyQuestions.suelo.slice(0,1)),
+      ...toCards("Formación del suelo · factores",[
+        ["¿Qué es la edafización? ¿Qué factores influyen en la formación del suelo?",[
+          definicionEdafizacion,
+          "<strong>Factores:</strong> presencia de seres vivos, pendiente del terreno, clima y tiempo."
+        ]],
+        ["¿Cómo influyen los seres vivos, la pendiente del terreno, el clima y el tiempo en la formación del suelo?",
+          factoresEdafizacion.slice(0,4).map(factor=>`<u><strong>${factor[0]}</strong></u>. ${resumenFactorEdafizacion(factor)}`)]
+      ]),
       ...toCards("Horizontes del suelo",studyQuestions.suelo.slice(3,4)),
       ...profileCards,
       ...toCards("Propiedades del suelo y fertilidad",studyQuestions.suelo.slice(4,6)),
