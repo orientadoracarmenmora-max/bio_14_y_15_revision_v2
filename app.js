@@ -169,6 +169,7 @@ const visual = {
   <figcaption><strong>Corte de un volcán.</strong> El cono rodea el cráter en la parte superior. Debajo, la chimenea conecta la abertura con la cámara magmática.</figcaption></figure>`,
   meta: `<figure><div class="rock-samples" aria-hidden="true"><span class="foliation"></span><span class="mosaic"></span></div>
   <figcaption><strong>Dos estructuras.</strong> Izquierda, disposición en láminas o bandas (foliación). Derecha, mosaico de granos sin orientación preferente (granoblástica).</figcaption></figure>`,
+  ciclo: `<ul class="cycle-paths"><li><strong>Cualquier roca expuesta</strong> → meteorización y erosión → sedimentos.</li><li><strong>Roca en el interior</strong> → metamorfismo → roca metamórfica.</li><li><strong>Roca que se funde</strong> → magma → cristalización → roca ígnea.</li></ul>`
 };
 const examExternal = `<div class="grid"><section class="card"><h2>Qué entra · Tema 14</h2><ul>
 <li><strong>Meteorización.</strong> Define la meteorización y estudia los procesos mecánicos, químicos y biológicos. La profesora puede dar el nombre de un mecanismo, por ejemplo termoclastia, y pedir que lo expliques, o dar sus características y pedir que lo identifiques.</li>
@@ -275,7 +276,7 @@ const studyQuestions = {
       "<strong>Mineral magmático.</strong> El <strong>olivino</strong> puede formarse cuando cristaliza el magma.",
       "<strong>Mineral metamórfico.</strong> El <strong>granate</strong> puede formarse cuando una roca se transforma por metamorfismo."
     ],true],
-    ["Explica el ciclo de las rocas. ¿Cómo se forman los sedimentos y las rocas sedimentarias, metamórficas e ígneas?",caminosCicloRocas,true],
+    ["¿Qué procesos del ciclo forman rocas sedimentarias, metamórficas e ígneas?","Los sedimentos forman rocas sedimentarias por diagénesis. Las rocas que cambian en estado sólido forman rocas metamórficas por metamorfismo. Si una roca se funde se forma magma, y cuando este se enfría y solidifica se forma una roca ígnea.",true],
     ["Construye un recorrido del ciclo que incluya granito, sedimentos, arenisca y cuarcita.","El granito expuesto se meteoriza y los materiales se movilizan, se transportan y se depositan. La diagénesis puede formar arenisca. Si es rica en cuarzo, el metamorfismo puede transformarla en cuarcita."]
   ],
   esfuerzos: [

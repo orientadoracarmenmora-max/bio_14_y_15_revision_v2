@@ -12,13 +12,6 @@ const estructurasMetamorficas = [
  "<strong>Estructura granoblástica.</strong> Los cristales encajan como piezas de un puzle y apuntan en distintas direcciones. Forman un <strong>mosaico de cristales</strong>. Se observa en la cuarcita y el mármol."
 ];
 
-const caminosCicloRocas = [
- "<strong>Roca expuesta → sedimentos.</strong> La meteorización fragmenta o altera la roca. Los materiales se erosionan, se transportan y se depositan.",
- "<strong>Sedimentos → roca sedimentaria.</strong> Los sedimentos se compactan y sus granos se unen. Esa transformación se llama <strong>diagénesis</strong>.",
- "<strong>Roca → roca metamórfica.</strong> La presión o la temperatura transforman la roca en <strong>estado sólido</strong>. Es el <strong>metamorfismo</strong>.",
- "<strong>Roca → magma → roca ígnea.</strong> Si la roca se funde, se forma <strong>magma</strong>. Al enfriarse y solidificarse, el magma forma una <strong>roca ígnea</strong>."
-];
-
 const lecciones = [
 {
  id:"magma", titulo:"Procesos geológicos internos, magmatismo y volcanes", paginas:"288–291",
@@ -74,10 +67,7 @@ const lecciones = [
  ["Qué es un silicato","Los <strong>silicatos</strong> son minerales con silicio y oxígeno como componentes fundamentales."],
  ["7. Los minerales de las rocas magmáticas y metamórficas · olivino y granates","El <strong>olivino</strong> es un silicato de magnesio y hierro. Es característico de la peridotita, una roca del manto, y también aparece en algunos basaltos. Es el ejemplo magmático que destacó Belén. Los <strong>granates</strong> forman un grupo de silicatos de composición variable. Pueden originarse en condiciones metamórficas de media y alta presión."],
  ["Del sedimento a la roca","Las rocas expuestas pueden originar <strong>sedimentos</strong> mediante meteorización, erosión, transporte y depósito. La <strong>diagénesis</strong> transforma esos sedimentos en rocas sedimentarias."],
- ["8. El ciclo de las rocas · cómo se transforman",[
-  ...caminosCicloRocas,
-  "<strong>El ciclo continúa.</strong> Si una roca vuelve a quedar expuesta en la superficie, puede volver a dar sedimentos. Las rocas pueden seguir distintos caminos."
- ]]
+ ["8. El ciclo de las rocas · cómo se transforman","Las rocas expuestas pueden volver a convertirse en sedimentos por meteorización, erosión, transporte y depósito. Por <strong>diagénesis</strong>, los sedimentos forman rocas sedimentarias. En profundidad, una roca que cambia en estado sólido da lugar a una roca metamórfica. Si se funde, se forma <strong>magma</strong>. Al enfriarse y solidificarse, el magma origina rocas ígneas. Cuando se eleva el terreno, las rocas pueden quedar expuestas otra vez. Así pueden volver a formar sedimentos y continuar el ciclo."]
  ],
  esquema:["Roca expuesta","Sedimentos","Diagénesis","Roca sedimentaria"],
  ejemplo:"<strong>Granito</strong> → sedimentos mediante <strong>meteorización</strong> y <strong>erosión</strong> → <strong>arenisca</strong> mediante <strong>diagénesis</strong> → <strong>cuarcita</strong> mediante <strong>metamorfismo</strong>."
