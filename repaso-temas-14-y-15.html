@@ -925,7 +925,7 @@ const studyQuestions = {
     ["Antes de que se forme el suelo, ¿cómo se llama la cubierta de fragmentos sueltos? Explica cómo se origina.","Se llama detrito o regolito. La meteorización desprende fragmentos de roca llamados clastos. Cuando se acumulan, forman esa cubierta de materiales sueltos. La edafización transforma el detrito en suelo fértil."],
     ["Además de los seres vivos, la pendiente, el clima y el tiempo, ¿qué otros factores influyen en la edafización?",resumenFactorEdafizacion(factoresEdafizacion[4])],
     ["En un perfil, ¿cómo distingues los horizontes O, A, B y C?",horizontesDelSuelo,true],
-    ["Define la textura, la porosidad y la permeabilidad del suelo. ¿Puede un suelo arcilloso tener mucha porosidad y dejar pasar el agua lentamente?",[...propiedadesSuelo,ejemploSueloArcilloso],true],
+    ["Define la textura, la porosidad y la permeabilidad del suelo.",propiedadesSuelo,true],
     ["¿Qué factores favorecen que un suelo sea más fértil?",fertilidadSuelo,true],
     ["¿En qué se diferencian el caliche y el suelo rocoso o litosuelo?",calicheYSueloRocoso,true],
     ["Un perfil tiene una costra de cal cerca de la superficie. El otro presenta una capa de suelo muy delgada sobre roca madre poco alterada. ¿Cuál es el caliche y cuál es el suelo rocoso? Justifica tu respuesta.","El primer perfil es un caliche. La pista es la costra de cal. En un clima árido, el agua asciende por capilaridad y, al evaporarse, deja cal o sales cerca de la superficie. El segundo perfil es un litosuelo o suelo rocoso. Las pistas son el poco espesor del suelo, la roca madre poco alterada y los horizontes poco diferenciados.",true],
@@ -940,7 +940,16 @@ const studyQuestions = {
       "<strong>Transporte.</strong> El agua arrastra el sedimento ladera abajo.",
       "<strong>Sedimentación.</strong> Al llegar a la zona llana, el agua pierde velocidad y deja allí el sedimento."
     ]],
-    ["¿Cuáles son los modos de transporte de sedimentos? Distingue los que tienen contacto con el fondo de los que se producen separados de él.","En contacto con el fondo: reptación, rodadura y saltación. En la reptación las partículas se arrastran. En la rodadura ruedan y en la saltación avanzan en saltos. Separados del fondo: suspensión, flotación y disolución. En suspensión las partículas viajan en el fluido, en flotación van por su superficie y en disolución las sustancias viajan disueltas en el agua.",true],
+    ["¿Cuáles son los modos de transporte de sedimentos? Distingue los que tienen contacto con el fondo de los que se producen separados de él.",[
+      "<u><strong>En contacto con el fondo</strong></u>",
+      "<strong>Reptación.</strong> Las partículas se arrastran por el fondo.",
+      "<strong>Rodadura.</strong> Las partículas ruedan por el fondo.",
+      "<strong>Saltación.</strong> Las partículas avanzan a saltos y vuelven a tocar el fondo.",
+      "<u><strong>Separados del fondo</strong></u>",
+      "<strong>Suspensión.</strong> Las partículas viajan dentro del agua o del aire.",
+      "<strong>Flotación.</strong> Las partículas van por la superficie del agua.",
+      "<strong>Disolución.</strong> Las sustancias viajan disueltas en el agua."
+    ],true],
     ["Una partícula avanza dando saltos y otra viaja dentro del agua sin tocar el fondo. ¿Cómo se transporta cada una?","La primera viaja por saltación. La corriente la levanta y la partícula vuelve a tocar el fondo antes del salto siguiente. La segunda viaja en suspensión. Permanece dentro del agua durante el desplazamiento, sin apoyarse en el fondo."],
     ["¿Cuándo tiene un sedimento madurez textural alta? Observa las muestras A y B del recuadro. ¿Cuál presenta mayor madurez textural? Justifica tu respuesta por el tamaño y la forma de los clastos.",`${relacionTransporteTextural} Un sedimento tiene madurez textural alta cuando está formado por clastos muy pequeños y redondeados. La muestra A, arena de playa, presenta esos dos rasgos y tiene mayor madurez textural. La muestra B, sedimento glaciar, tiene menor madurez textural porque sus fragmentos son angulosos y de distintos tamaños.`,true],
     ["Durante la sedimentación, ¿en qué se diferencian el depósito gravitacional y la acreción cinética?","En el depósito gravitacional, la corriente pierde energía y los clastos que transportaba caen al fondo por gravedad. En la acreción cinética, los clastos todavía están en movimiento cuando encuentran un obstáculo que provoca su acumulación. La pista es si los clastos caen al fondo al debilitarse la corriente o se acumulan al topar con un obstáculo.",true]
@@ -1020,9 +1029,9 @@ const questionPlacement = {
 const extraQuestions = {
   sedimentos: {
     0:["¿Qué es la erosión? ¿En qué se diferencia del detrito y de la sedimentación?",[
-      "<strong>Erosión.</strong> Comienza cuando un agente como el agua recoge parte del detrito y lo pone en movimiento.",
-      "<strong>Detrito.</strong> Son los fragmentos de roca que siguen acumulados en el lugar donde se formaron.",
-      "<strong>Sedimentación.</strong> Ocurre cuando el agua deja los fragmentos que estaba transportando."
+      "<strong>Erosión.</strong> Comienza cuando un agente, como el agua, el viento o el hielo, recoge parte del <strong>detrito</strong> (una acumulación de fragmentos de roca o clastos) y lo pone en movimiento. Las olas también pueden hacerlo.",
+      "<strong>Detrito.</strong> Es la acumulación de clastos en el lugar donde se formaron.",
+      "<strong>Sedimentación.</strong> Ocurre cuando los materiales que se estaban transportando se depositan."
     ],true],
     3:["¿Qué indica una madurez mineralógica alta? Explica por qué un sedimento puede ser rico en cuarzo o en minerales de arcilla después de una alteración prolongada.",madurezMineralogica]
   },
@@ -1433,9 +1442,10 @@ function renderSolvedExam(finalStudy = false) {
     question: "Escribe el nombre del horizonte que señala cada letra.",
     promptImage: trainingProfile(profile),
     answer: [
-      ...profile.correccion.map(([mark,horizon,why])=>`<strong>Marca ${mark} · Horizonte ${horizon}.</strong> ${why}`),
-      ...(profile.nota ? [profile.nota] : [])
-    ]
+      ...profile.correccion.map(([mark,horizon,why])=>`<strong>Marca ${mark} · Horizonte ${horizon}.</strong> ${finalStudy ? horizontesDelSuelo["OABC".indexOf(horizon)] : why}`),
+      ...(!finalStudy && profile.nota ? [profile.nota] : [])
+    ],
+    image:finalStudy && profile.foto==="cuatro-horizontes" ? figures({id:"suelo"},1) : ""
   }));
   const withImage = {
     "Mira el bloque diagrama.": tectonicStudyFigure,
@@ -1501,10 +1511,17 @@ function renderSolvedExam(finalStudy = false) {
       ...toCards("Horizontes del suelo",studyQuestions.suelo.slice(3,4)),
       ...profileCards,
       ...toCards("Propiedades del suelo y fertilidad",[
-        ["Define textura, porosidad y permeabilidad del suelo.",propiedadesSuelo],
-        ["¿Puede un suelo arcilloso tener mucha porosidad y dejar pasar el agua lentamente?",[
-          "<strong>Sí.</strong> Muchos poros pequeños pueden ocupar una parte importante del suelo y retener agua.",
-          "El agua circula lentamente por esos poros. Por eso el suelo puede ser <strong>poco permeable</strong>."
+        studyQuestions.suelo[4],
+        ["Si nos fijamos en cuánto espacio del suelo ocupan los huecos, ¿qué propiedad estamos describiendo?",[propiedadesSuelo[1]]],
+        ["Si nos fijamos en la facilidad con la que el agua atraviesa un suelo, ¿qué propiedad estamos describiendo?",[propiedadesSuelo[2]]],
+        ["En tres muestras predominan partículas de 2 mm, 0,002 mm y 0,05 mm, respectivamente. Según las medidas de referencia del libro, ¿cuál es arenosa, cuál arcillosa y cuál limosa?",[
+          "<strong>2 mm → arenosa.</strong> Predomina la arena.",
+          "<strong>0,002 mm → arcillosa.</strong> Predomina la arcilla.",
+          "<strong>0,05 mm → limosa.</strong> Predomina el limo."
+        ]],
+        ["En dos muestras, una tiene poros más grandes y la otra, poros más pequeños. Una es arenosa y la otra arcillosa. ¿Cuál es cuál?",[
+          "<strong>Suelo arenoso.</strong> Tiene los poros más grandes.",
+          "<strong>Suelo arcilloso.</strong> Tiene los poros más pequeños."
         ]],
         studyQuestions.suelo[5]
       ]),
@@ -1519,6 +1536,12 @@ function renderSolvedExam(finalStudy = false) {
       ]),
       ...toCards("Madurez textural · compara dos muestras",studyQuestions.sedimentos.slice(4,5))
         .map(card=>({...card,promptImage:figures({id:"sedimentos"},3)})),
+      ...toCards("Madurez textural · reconoce las pistas",[
+        ["La muestra A tiene clastos de 6 mm con bordes angulosos. La B tiene clastos de 0,5 mm con bordes redondeados. ¿Cuál tiene mayor madurez textural? Da dos pistas.",[
+          "La <strong>muestra B</strong> tiene mayor madurez textural.",
+          "Sus clastos son <strong>más pequeños</strong> y <strong>más redondeados</strong>."
+        ]]
+      ]),
       ...toCards("Sedimentación · dos formas de depósito",studyQuestions.sedimentos.slice(5,6))
         .map(card=>({...card,image:figures({id:"sedimentos"},4)})),
       ...preguntasRocasSedimentarias.flatMap(([format,entries],groupIndex)=> {
