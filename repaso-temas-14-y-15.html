@@ -1609,10 +1609,12 @@ function renderSolvedExam(finalStudy = false) {
         ["Las rocas cambian en una zona extensa donde se acercan dos placas. ¿Qué tipo de metamorfismo es?",[tiposMetamorfismo[2]]]
       ]).map((card,i)=>i===0 || i===2 ? {...card,image:figures({id:"meta"},2)} : card),
       ...toCards("Tema 15 · Serie regional · pregunta segura",[
-        studyQuestions.meta[1],
-        ["¿Qué rocas corresponden al bajo, medio y alto grado de metamorfismo en esta serie?",serieRegionalCuaderno.slice(2,5)],
-        ["¿En qué momento se pasa al ambiente magmático y cómo se forma el granito de anatexia?",serieRegionalCuaderno.slice(4)]
-      ]),
+        ["Ordena la serie metamórfica desde la arcilla hasta el granito de anatexia. Indica qué rocas corresponden a cada grado y explica cuándo se pasa al ambiente magmático.",serieRegionalCuaderno.slice(1)],
+        ["¿Qué rocas se forman en el metamorfismo de bajo grado? ¿Cuál aparece primero?",[serieRegionalCuaderno[2]]],
+        ["¿Qué roca se forma en el metamorfismo de grado medio?",[serieRegionalCuaderno[3]]],
+        ["¿Qué roca se forma en el metamorfismo de alto grado?",[serieRegionalCuaderno[4]]],
+        ["¿En qué momento se pasa al ambiente magmático y cómo se forma el granito de anatexia?",[serieRegionalCuaderno[5]]]
+      ]).map((card,i)=>i===0 ? {...card,image:flow(serie)} : card),
       ...toCards("Tema 15 · Rocas metamórficas",[
         studyQuestions.meta[2],studyQuestions.meta[5]
       ]).map(card=>({...card,image:figures({id:"meta"},5)})),
