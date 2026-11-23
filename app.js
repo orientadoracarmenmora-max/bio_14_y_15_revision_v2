@@ -314,7 +314,7 @@ const extraQuestions = {
   },
   meta: {
     1:["¿Qué cambios puede experimentar una roca durante el metamorfismo?","Color: puede cambiar al cambiar los minerales. Densidad: puede aumentar si disminuyen los huecos. Tenacidad: aumenta si los granos quedan más unidos y resisten mejor la rotura. Textura: cambia cuando los cristales crecen. Estructura: cambia cuando los minerales se orientan y forman láminas o bandas.",true],
-    2:["Distingue metamorfismo dinámico, de contacto y regional.","En el dinámico predominan los esfuerzos mecánicos en zonas de falla, donde la roca se deforma o se tritura. En el térmico o de contacto predomina el calor de una intrusión, que transforma la roca que la rodea. El regional afecta zonas extensas donde convergen placas. Según la zona, predomina la presión o aumentan tanto la presión como la temperatura.",true]
+    2:["Distingue metamorfismo dinámico, de contacto y regional.",tiposMetamorfismo,true]
   },
   ciclo: {
     0:["¿Qué elementos son fundamentales en los silicatos?","El silicio y el oxígeno."]
