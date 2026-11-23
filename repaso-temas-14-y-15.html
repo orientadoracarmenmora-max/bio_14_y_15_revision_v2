@@ -1586,7 +1586,16 @@ function renderSolvedExam(finalStudy = false) {
        question:"¿Dónde practicar las rocas plutónicas y volcánicas por su nombre y por sus características?",
        answer:"Las fotografías y los ejercicios para describir e identificar las rocas están en la aplicación de rocas magmáticas.",
        resource:'<p><a class="button" href="https://orientadoracarmenmora-max.github.io/rocas_magmaticas/" target="_blank" rel="noopener">Abrir la práctica de rocas magmáticas</a></p>'},
-      ...toCards("Tema 15 · Metamorfismo y sus factores",studyQuestions.meta.slice(0,1)),
+      ...toCards("Tema 15 · Metamorfismo y sus factores",[
+        studyQuestions.meta[0],
+        ...[
+          "¿Qué cambios puede provocar el metamorfismo en una roca? ¿En qué estado permanece?",
+          "¿Qué cambio puede provocar la presión litostática en una roca?",
+          "¿Qué cambio puede favorecer la temperatura durante el metamorfismo?",
+          "¿Qué cambios pueden provocar los esfuerzos dirigidos en una roca?",
+          "¿Cómo puede el agua modificar los minerales de una roca durante el metamorfismo?"
+        ].map((question,i)=>[question,[studyQuestions.meta[0][1][i]]])
+      ]),
       ...toCards("Tema 15 · Cambios en la roca",[
         extraQuestions.meta[1],
         ["Si crecen los cristales, ¿qué cambia? ¿Y si los minerales se orientan en láminas o bandas?",cambiosMetamorfismo.slice(3)],
