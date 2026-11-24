@@ -1516,32 +1516,41 @@ function renderSolvedExam(finalStudy = false) {
         [`¿Qué tipos de meteorización ${tipo} hay?`,[lista]],
         ...fichas.map(({pregunta,respuesta})=>[pregunta,respuesta])
       ])),
-      ...toCards("Meteorización · identifica el mecanismo",[
-        mecanismos[0].fichas[2], mecanismos[1].fichas[1],
-        mecanismos[0].fichas[0], mecanismos[1].fichas[3],
-        mecanismos[0].fichas[3], mecanismos[1].fichas[0],
-        mecanismos[0].fichas[1], mecanismos[1].fichas[2]
-      ].map(({caso,respuesta})=>[caso,respuesta])),
       ...toCards("Meteorización biológica",[
         ["¿Qué tipos de meteorización biológica hay?",[
           "<strong>Por acción mecánica.</strong> Los seres vivos pueden fragmentar la roca.",
           "<strong>Por acción química.</strong> Los seres vivos pueden favorecer la alteración de sus minerales."
         ]],
-        preguntasBiologica[0][1][0]
+        preguntasBiologica[0][1][0],
+        ["¿Cómo actúan los seres vivos en la meteorización biológica por acción mecánica?",[
+          "Los seres vivos pueden <strong>fragmentar la roca</strong>.",raicesMeteorizacion
+        ]],
+        ["¿Cómo actúan los seres vivos en la meteorización biológica por acción química?",[
+          "Los seres vivos favorecen la <strong>alteración de los minerales</strong>.",
+          "Por ejemplo, el oxígeno que aporta la fotosíntesis al agua y al aire favorece la <strong>oxidación</strong>."
+        ]]
       ]),
-      ...toCards("Meteorización",[
-        ["¿Cómo favorece la meteorización la cubierta herbácea? ¿De qué tipo es?",[
-          "Es <strong>meteorización biológica por acción química</strong>.",
-          preguntasBiologica[0][1][1][1]
-        ]],
+      ...toCards("Meteorización · identifica el mecanismo",[
+        ...[mecanismos[0].fichas[2], mecanismos[1].fichas[1]]
+          .map(({caso,respuesta})=>[caso,respuesta]),
         [preguntasBiologica[1][1][0][0],[
-          "Es <strong>meteorización biológica por acción mecánica</strong>.",
-          raicesMeteorizacion
+          "Es <strong>meteorización biológica por acción mecánica</strong>.",raicesMeteorizacion
         ]],
-        ...preguntasBiologica[1][1].slice(1).map(([question,answer])=>[
-          question+" ¿De qué tipo de meteorización se trata?",
-          ["Es <strong>meteorización biológica por acción química</strong>.",answer]
-        ])
+        ...[mecanismos[0].fichas[0], mecanismos[1].fichas[3]]
+          .map(({caso,respuesta})=>[caso,respuesta]),
+        ["¿Cómo favorece la meteorización la cubierta herbácea? ¿De qué tipo es?",[
+          "Es <strong>meteorización biológica por acción química</strong>.",preguntasBiologica[0][1][1][1]
+        ]],
+        ...[mecanismos[0].fichas[3], mecanismos[1].fichas[0]]
+          .map(({caso,respuesta})=>[caso,respuesta]),
+        [preguntasBiologica[1][1][1][0]+" ¿De qué tipo de meteorización se trata?",[
+          "Es <strong>meteorización biológica por acción química</strong>.",preguntasBiologica[1][1][1][1]
+        ]],
+        ...[mecanismos[0].fichas[1], mecanismos[1].fichas[2]]
+          .map(({caso,respuesta})=>[caso,respuesta]),
+        [preguntasBiologica[1][1][2][0]+" ¿De qué tipo de meteorización se trata?",[
+          "Es <strong>meteorización biológica por acción química</strong>.",preguntasBiologica[1][1][2][1]
+        ]]
       ]),
       ...toCards("Formación del suelo · factores",[
         ["¿Qué es la edafización? ¿Qué factores influyen en la formación del suelo?",[
