@@ -336,10 +336,10 @@ const resumenFactorEdafizacion = ([, puntos, introduccion]) =>
  [introduccion, ...puntos].filter(Boolean).join(" ").replace(/<strong>|<\/strong>|<mark class="soil-factor">|<\/mark>/g, "");
 
 const horizontesDelSuelo = [
- "El <strong>horizonte O</strong> (cero) es el <strong>mantillo superficial</strong>, reconocible por las hojas y otros restos orgánicos. Los descomponedores transforman parte de esos restos en <strong>humus</strong>.",
- "En el <strong>horizonte A</strong>, el agua de lluvia que se infiltra arrastra sustancias solubles y algunos componentes del humus. Por eso es la zona de <strong>lavado</strong>.",
- "El <strong>horizonte B</strong> se encuentra por debajo del A y <strong>acumula</strong> parte del material arrastrado.",
- "El <strong>horizonte C</strong> contiene fragmentos y restos de la meteorización de la <strong>roca madre</strong>."
+ `El <strong>horizonte O</strong> (cero) es el <mark class="soil-factor"><strong>mantillo superficial</strong></mark>, reconocible por las hojas y otros restos orgánicos. Los descomponedores transforman parte de esos restos en <strong>humus</strong>.`,
+ `En el <strong>horizonte A</strong>, el agua de lluvia que se infiltra arrastra sustancias solubles y algunos componentes del humus. Por eso es la <mark class="soil-factor"><strong>zona de lavado</strong></mark>.`,
+ `El <strong>horizonte B</strong> se encuentra por debajo del A y <strong>acumula</strong> parte del <mark class="soil-factor"><strong>material arrastrado</strong></mark>.`,
+ `El <strong>horizonte C</strong> contiene <mark class="soil-factor"><strong>fragmentos de la roca madre</strong></mark> y restos de su meteorización.`
 ];
 
 const relacionTransporteTextural = "Cuanto más largo es el transporte, más pequeños y redondeados se hacen los clastos.";
