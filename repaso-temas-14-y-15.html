@@ -746,14 +746,15 @@ function preferredStudyVoice(voices,savedVoice,chrome) {
 const endsSentence = part => /[.!?][»”"')\]]*$/u.test(part)
   && !/\b(?:p|pp|pág|págs|fig|núm|aprox|etc)\.$/iu.test(part);
 
-function speechSentences(text) {
+function speechSentences(text,keepShortHeading=false) {
   const sentences = [];
   const boundary = /([.!?][»”"')\]]*)\s+(?=[\p{Lu}¿¡0-9«“"])/gu;
   let start = 0;
   for (const match of text.matchAll(boundary)) {
     const end = match.index + match[1].length;
     const part = text.slice(start,end).trim();
-    if (endsSentence(part)) {
+    const isShortHeading = keepShortHeading && start === 0 && /^[\p{L}]+\.$/u.test(part);
+    if (endsSentence(part) && !isShortHeading) {
       sentences.push(part);
       start = match.index + match[0].length;
     }
@@ -792,12 +793,12 @@ function speak(area,trigger) {
   trigger.querySelector("span").textContent = "■";
   const lines = area.querySelectorAll("h1,h2,h3,p,figcaption,legend,.choice,li,.feedback");
   const chunks = area.matches(".spoken-model")
-    ? area.innerText.split(/\r\n?|\n/).flatMap(speechSentences)
+    ? area.innerText.split(/\r\n?|\n/).flatMap(line => speechSentences(line,true))
     : Array.from(lines)
     .filter(node => node.innerText.trim() && !node.closest("[hidden]") && (!node.closest("details") || node.closest("details").open) && !node.querySelector("p,li"))
     .flatMap(node => {
       const text = node.querySelector(".sort-row span")?.innerText || node.innerText;
-      return text.split(/\r\n?|\n/).flatMap(speechSentences);
+      return text.split(/\r\n?|\n/).flatMap(line => speechSentences(line));
     });
   let index = 0;
   function next() {
