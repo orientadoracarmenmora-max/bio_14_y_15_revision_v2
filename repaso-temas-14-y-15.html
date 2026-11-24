@@ -729,12 +729,19 @@ const defaultVoiceLabel = "Automática (Google o voz del dispositivo)";
 const spanishVoices = () => (synth?.getVoices() || []).filter(voice => /^es(?:[-_]|$)/i.test(voice.lang));
 const isGoogle = voice => /\bgoogle\b/i.test(voice.name + " " + voice.voiceURI);
 const isSpain = voice => /^es[-_]es$/i.test(voice.lang);
+const isChrome = /\b(?:Chrome|CriOS)\//.test(navigator.userAgent) && !/\b(?:Edg\w*|OPR|SamsungBrowser)\//.test(navigator.userAgent);
 function deviceVoice(voices) {
   const available = voices.filter(voice => !isGoogle(voice));
   return available.find(voice => isSpain(voice) && /\bm[oó]nica\b/iu.test(voice.name))
     || available.find(isSpain)
     || available.find(voice => voice.default)
     || available[0];
+}
+function preferredStudyVoice(voices,savedVoice,chrome) {
+  const google = voices.filter(isGoogle);
+  const googleSpanish = google.find(isSpain) || google[0];
+  if (chrome) return googleSpanish || deviceVoice(voices);
+  return voices.find(voice => voice.voiceURI === savedVoice) || googleSpanish || deviceVoice(voices);
 }
 const endsSentence = part => /[.!?][»”"')\]]*$/u.test(part)
   && !/\b(?:p|pp|pág|págs|fig|núm|aprox|etc)\.$/iu.test(part);
@@ -777,9 +784,7 @@ function speak(area,trigger) {
   if (!synth) { $("speech-status").textContent = "Lectura en voz alta no disponible en este navegador."; return; }
   stopSpeech();
   const voices = spanishVoices();
-  const google = voices.filter(isGoogle);
-  let voice = voices.find(item => item.voiceURI === state.voice)
-    || google.find(isSpain) || google[0] || deviceVoice(voices);
+  let voice = preferredStudyVoice(voices,state.voice,isChrome);
   const currentRun = speechRun;
   activeSpeaker = trigger;
   trigger.setAttribute("aria-pressed","true");
