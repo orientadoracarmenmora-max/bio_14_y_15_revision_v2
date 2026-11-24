@@ -314,12 +314,12 @@ const factoresEdafizacion = [
    "La <strong>descomposición de los restos orgánicos</strong> forma <strong>humus</strong>."
  ], "Los seres vivos actúan de forma <strong>mecánica</strong> y <strong>química</strong> sobre el suelo en formación."],
  ["Pendiente del terreno", [
-   "En <strong>pendientes pronunciadas</strong>, el detrito puede desplazarse, lo que impide la formación del suelo (edafización).",
-   "En <strong>zonas llanas</strong>, el detrito es más estable y se favorece la formación del suelo (edafización)."
+   `En <mark class="soil-factor"><strong>pendientes pronunciadas</strong></mark>, el detrito puede desplazarse, lo que impide la formación del suelo (edafización).`,
+   `En <mark class="soil-factor"><strong>zonas llanas</strong></mark>, el detrito es más estable y se favorece la formación del suelo (edafización).`
  ]],
  ["El clima", [
    "En <strong>climas húmedos y cálidos</strong>, hay más actividad biológica. El suelo se forma más deprisa.",
-   "En <strong>climas glaciares y desérticos</strong>, hay menos actividad biológica. Por eso es más difícil que se forme el suelo."
+   `En <mark class="soil-factor"><strong>climas glaciares y desérticos</strong></mark>, hay menos actividad biológica. Por eso es más difícil que se forme el suelo.`
  ]],
  ["El tiempo", [
    "El suelo tarda décadas o siglos en formarse."
@@ -332,7 +332,7 @@ const factoresEdafizacion = [
 ];
 
 const resumenFactorEdafizacion = ([, puntos, introduccion]) =>
- [introduccion, ...puntos].filter(Boolean).join(" ").replace(/<\/?strong>/g, "");
+ [introduccion, ...puntos].filter(Boolean).join(" ").replace(/<strong>|<\/strong>|<mark class="soil-factor">|<\/mark>/g, "");
 
 const horizontesDelSuelo = [
  "El <strong>horizonte O</strong> (cero) es el <strong>mantillo superficial</strong>, reconocible por las hojas y otros restos orgánicos. Los descomponedores transforman parte de esos restos en <strong>humus</strong>.",
