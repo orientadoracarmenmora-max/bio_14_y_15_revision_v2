@@ -1517,17 +1517,24 @@ function renderSolvedExam(finalStudy = false) {
         ...fichas.map(({pregunta,respuesta})=>[pregunta,respuesta])
       ])),
       ...toCards("Meteorización biológica",[
-        ["¿Qué tipos de meteorización biológica hay?",[
-          "<strong>Por acción mecánica.</strong> Los seres vivos pueden fragmentar la roca.",
-          "<strong>Por acción química.</strong> Los seres vivos pueden favorecer la alteración de sus minerales."
+        ["¿En qué consiste la meteorización biológica? ¿Cómo se produce?",[
+          "Es la alteración de las rocas por la acción de los <strong>seres vivos</strong>. Puede ser <strong>mecánica</strong> o <strong>química</strong>.",
+          `<strong>Raíces de los árboles.</strong> ${raicesMeteorizacion}`,
+          "<strong>Fotosíntesis.</strong> Aporta oxígeno al agua y al aire, lo que favorece la oxidación de minerales.",
+          `<strong>Cubierta herbácea.</strong> ${preguntasBiologica[0][1][1][1]}`,
+          "<strong>Respiración y descomposición.</strong> Aportan dióxido de carbono al agua. El agua se vuelve más ácida y favorece la carbonatación."
         ]],
-        preguntasBiologica[0][1][0],
-        ["¿Cómo actúan los seres vivos en la meteorización biológica por acción mecánica?",[
+        ["¿Cómo actúan las raíces en la meteorización biológica?",[
           "Los seres vivos pueden <strong>fragmentar la roca</strong>.",raicesMeteorizacion
         ]],
-        ["¿Cómo actúan los seres vivos en la meteorización biológica por acción química?",[
-          "Los seres vivos favorecen la <strong>alteración de los minerales</strong>.",
-          "Por ejemplo, el oxígeno que aporta la fotosíntesis al agua y al aire favorece la <strong>oxidación</strong>."
+        ["¿Cómo favorece la fotosíntesis la meteorización biológica?",[
+          "Aporta <strong>oxígeno</strong> al agua y al aire, lo que favorece la <strong>oxidación</strong> de minerales."
+        ]],
+        ["¿Cómo favorece la cubierta herbácea la meteorización biológica?",[
+          preguntasBiologica[0][1][1][1]
+        ]],
+        ["¿Cómo favorecen la respiración y la descomposición la meteorización biológica?",[
+          preguntasBiologica[1][1][1][1]
         ]]
       ]),
       ...toCards("Meteorización · identifica el mecanismo",[
