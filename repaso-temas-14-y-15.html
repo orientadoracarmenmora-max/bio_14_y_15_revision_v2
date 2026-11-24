@@ -377,9 +377,9 @@ const calicheYSueloRocoso = [
 ];
 
 const propiedadesSuelo = [
- "La <strong>textura</strong> indica qué proporción de arena, limo y arcilla hay en la parte mineral del suelo.",
- "La <strong>porosidad</strong> es el porcentaje del suelo ocupado por huecos que pueden contener aire o agua.",
- "La <strong>permeabilidad</strong> es la facilidad con que el agua circula por esos huecos."
+ `La <mark class="soil-factor"><strong>textura</strong></mark> indica qué proporción de arena, limo y arcilla hay en la parte mineral del suelo.`,
+ `La <mark class="soil-factor"><strong>porosidad</strong></mark> es el porcentaje del suelo ocupado por huecos que pueden contener aire o agua.`,
+ `La <mark class="soil-factor"><strong>permeabilidad</strong></mark> es la facilidad con que el agua circula por esos huecos.`
 ];
 const tamanosTexturaSuelo = "Tamaños de referencia del libro: <strong>arena, 2 mm</strong> · <strong>limo, 0,05 mm</strong> · <strong>arcilla, 0,002 mm</strong>.";
 const comparacionPorosSuelo = "En el <strong>suelo arenoso</strong> los poros son <strong>más grandes</strong>. En el <strong>suelo arcilloso</strong> son <strong>más pequeños</strong>.";
@@ -1575,7 +1575,7 @@ function renderSolvedExam(finalStudy = false) {
       ...profileCards,
       ...toCards("Propiedades del suelo y fertilidad",[
         ["¿Cuáles son las tres propiedades del suelo? Nómbralas y define cada una.",[
-          "Las tres propiedades son la <strong>textura</strong>, la <strong>porosidad</strong> y la <strong>permeabilidad</strong>.",
+          `Las tres propiedades son la <mark class="soil-factor"><strong>textura</strong></mark>, la <mark class="soil-factor"><strong>porosidad</strong></mark> y la <mark class="soil-factor"><strong>permeabilidad</strong></mark>.`,
           propiedadesSuelo[0], tamanosTexturaSuelo,
           propiedadesSuelo[1], comparacionPorosSuelo,
           propiedadesSuelo[2]
