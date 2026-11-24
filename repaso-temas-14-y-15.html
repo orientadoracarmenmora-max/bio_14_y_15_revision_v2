@@ -1635,7 +1635,7 @@ function renderSolvedExam(finalStudy = false) {
         .map(card=>({...card,image:figures({id:"sedimentos"},4)})),
       ...preguntasRocasSedimentarias.flatMap(([format,entries],groupIndex)=> {
         const imagesByGroup = [
-          [[],[1,"carbonatadas",3]],
+          [[],[1,"carbonatadas","evaporiticas","organicas",3]],
           [[1],[1],["carbonatadas"],["evaporiticas"],["organicas"]],
           [[1],["organicas"],[3]],
           [[4]]
