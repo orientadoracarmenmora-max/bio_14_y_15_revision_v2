@@ -97,6 +97,7 @@ textarea{display:block;width:100%;margin:.3rem 0 .85rem;padding:.65rem;backgroun
 #study-section, #study-topic { max-width:100%; }
 
 .soil-factor { background: #f8dce7; color: #2b2025; padding-inline: .28em; border-radius: .2em; }
+.soil-factor.soil-factor-heading { background: #dceccf; color: #20301e; }
 :root.contrast .soil-factor { background: var(--fill); color: var(--ink); }
 .study-points { padding-inline-start: 1.45em; }
 .study-points > li + li { margin-block-start: .55em; }
@@ -318,7 +319,7 @@ const factoresEdafizacion = [
    `En <mark class="soil-factor"><strong>zonas llanas</strong></mark>, el detrito es más estable y se favorece la formación del suelo (edafización).`
  ]],
  ["El clima", [
-   "En <strong>climas húmedos y cálidos</strong>, hay más actividad biológica. El suelo se forma más deprisa.",
+   `En <mark class="soil-factor"><strong>climas húmedos y cálidos</strong></mark>, hay más actividad biológica. El suelo se forma más deprisa.`,
    `En <mark class="soil-factor"><strong>climas glaciares y desérticos</strong></mark>, hay menos actividad biológica. Por eso es más difícil que se forme el suelo.`
  ]],
  ["El tiempo", [
@@ -1259,7 +1260,7 @@ function lessonBody(lesson,readButtons=false) {
   <div class="block-head"><h2>${title}</h2>${listen(title)}</div>
   ${showPicturesFirst ? pictures : ""}
   <div class="explanation">${explanation(body)}</div>
-  ${subtopics.map(([key,heading,content,intro])=>`<section><div class="block-head"><h3>${lesson.id === "suelo" && index === 0 ? `<mark class="soil-factor">${heading}</mark>` : heading}</h3>${listen(heading)}</div>
+  ${subtopics.map(([key,heading,content,intro])=>`<section><div class="block-head"><h3>${lesson.id === "suelo" && index === 0 ? `<mark class="soil-factor soil-factor-heading">${heading}</mark>` : heading}</h3>${listen(heading)}</div>
   <div class="explanation">${Array.isArray(content) ? `${intro ? `<p>${intro}</p>` : ""}${studyPoints(content)}` : explanation(content)}</div>${readButtons ? figures(lesson,key) : ""}</section>`).join("")}
   ${showPicturesFirst ? "" : pictures}
   ${readButtons ? studyPrompts(lesson.id,index) : ""}</section>`;
@@ -1565,7 +1566,7 @@ function renderSolvedExam(finalStudy = false) {
         ]],
         ["¿Cómo influyen los seres vivos, la pendiente del terreno, el clima y el tiempo en la formación del suelo?",
           factoresEdafizacion.slice(0,4).flatMap(([nombre,puntos,introduccion])=>[
-            `<mark class="soil-factor"><strong>${nombre}</strong></mark>`,
+            `<mark class="soil-factor soil-factor-heading"><strong>${nombre}</strong></mark>`,
             ...(introduccion ? [introduccion] : []),
             ...puntos
           ])]
