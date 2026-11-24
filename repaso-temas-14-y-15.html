@@ -309,9 +309,8 @@ const meteorizacionQuimica = {
 const definicionEdafizacion = "La edafización es el proceso por el que el detrito, también llamado regolito, se transforma en un suelo fértil.";
 const factoresEdafizacion = [
  ["Presencia de seres vivos", [
-   "Mezclan los componentes del detrito.",
-   "Aumentan la <strong>porosidad</strong> y la capacidad de retener agua.",
-   "Al <strong>aportar sustancias</strong>, favorecen la meteorización química.",
+   "<strong>Acción mecánica.</strong> Mezclan los componentes del detrito y aumentan la <strong>porosidad</strong> y la capacidad de retener agua.",
+   "<strong>Acción química.</strong> <strong>Aportan sustancias</strong> que favorecen la meteorización química.",
    "La <strong>descomposición de los restos orgánicos</strong> forma <strong>humus</strong>."
  ], "Los seres vivos actúan de forma <strong>mecánica</strong> y <strong>química</strong> sobre el suelo en formación."],
  ["Pendiente del terreno", [
@@ -1565,7 +1564,11 @@ function renderSolvedExam(finalStudy = false) {
           "<strong>Factores:</strong> presencia de seres vivos, pendiente del terreno, clima y tiempo."
         ]],
         ["¿Cómo influyen los seres vivos, la pendiente del terreno, el clima y el tiempo en la formación del suelo?",
-          factoresEdafizacion.slice(0,4).map(factor=>`<u><strong>${factor[0]}</strong></u>. ${resumenFactorEdafizacion(factor)}`)]
+          factoresEdafizacion.slice(0,4).flatMap(([nombre,puntos,introduccion])=>[
+            `<mark class="soil-factor"><strong>${nombre}</strong></mark>`,
+            ...(introduccion ? [introduccion] : []),
+            ...puntos
+          ])]
       ]),
       ...toCards("Horizontes del suelo",studyQuestions.suelo.slice(3,4)),
       ...profileCards,
