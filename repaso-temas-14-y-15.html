@@ -1615,7 +1615,8 @@ function renderSolvedExam(finalStudy = false) {
       ]),
       ...toCards("Tipos de suelo · Caliche y suelo rocoso",studyQuestions.suelo.slice(6,10)),
       ...toCards("Erosión, detrito y sedimentación",[extraQuestions.sedimentos[0],studyQuestions.sedimentos[1]]),
-      ...toCards("Tipos de transporte de sedimentos",studyQuestions.sedimentos.slice(2,4)),
+      ...toCards("Tipos de transporte de sedimentos",studyQuestions.sedimentos.slice(2,4))
+        .map((card,i)=>i===0 ? {...card,image:figures({id:"sedimentos"},2)} : card),
       ...toCards("Transporte · reconoce el modo",[
         ["Una partícula se arrastra sin separarse del fondo. ¿Cómo se transporta?","Por reptación. La partícula se arrastra sobre el fondo."],
         ["Un canto gira sobre el fondo empujado por la corriente. ¿Cómo se transporta?","Por rodadura. El canto rueda sobre el fondo."],
