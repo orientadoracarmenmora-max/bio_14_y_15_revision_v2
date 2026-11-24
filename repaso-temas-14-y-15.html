@@ -1495,30 +1495,33 @@ function renderSolvedExam(finalStudy = false) {
   };
   const finalCards = () => {
     const toCards = (title, entries) => entries.map(([question,answer])=>({title,question,answer}));
+    const mecanismos = [
+      {tipo:"mecánica",grupos:preguntasMecanica,
+       lista:"Los tipos estudiados son <strong>gelifracción, descompresión, abrasión y termoclastia</strong>.",
+       nombres:["Termoclastia","Gelifracción","Descompresión","Abrasión"],casos:[2,3,1,0]},
+      {tipo:"química",grupos:preguntasQuimica,
+       lista:"Los tipos estudiados son <strong>oxidación, disolución, carbonatación e hidrólisis</strong>.",
+       nombres:["Oxidación","Disolución","Carbonatación","Hidrólisis"],casos:[2,3,0,1]}
+    ].map(({tipo,grupos,lista,nombres,casos})=>({
+      tipo,lista,
+      fichas:grupos[0][1].map(([pregunta,explicacion],i)=>{
+        const [caso] = grupos[1][1][casos[i]];
+        const respuesta = [`Es <strong>meteorización ${tipo}</strong>. El mecanismo se llama <strong>${nombres[i].toLowerCase()}</strong>.`,explicacion];
+        return {pregunta, caso:caso.split("¿")[0].trim()+" ¿Qué tipo de meteorización es? ¿Qué mecanismo actúa?", respuesta};
+      })
+    }));
     return [
       ...toCards("Meteorización · definición y tipos",studyQuestions.meteorizacion),
-      ...[
-        {tipo:"mecánica",grupos:preguntasMecanica,
-         lista:"Los tipos estudiados son <strong>gelifracción, descompresión, abrasión y termoclastia</strong>.",
-         nombres:["Termoclastia","Gelifracción","Descompresión","Abrasión"],casos:[2,3,1,0]},
-        {tipo:"química",grupos:preguntasQuimica,
-         lista:"Los tipos estudiados son <strong>oxidación, disolución, carbonatación e hidrólisis</strong>.",
-         nombres:["Oxidación","Disolución","Carbonatación","Hidrólisis"],casos:[2,3,0,1]}
-      ].flatMap(({tipo,grupos,lista,nombres,casos})=>{
-        const directas = grupos[0][1];
-        const ejemplos = grupos[1][1];
-        return [
-          ...toCards(`Meteorización ${tipo}`,[[`¿Qué tipos de meteorización ${tipo} hay?`,[lista]]]),
-          ...directas.flatMap(([enunciado,explicacion],i)=>{
-            const [pregunta] = ejemplos[casos[i]];
-            const answer = [`Es <strong>meteorización ${tipo}</strong>. El mecanismo se llama <strong>${nombres[i].toLowerCase()}</strong>.`,explicacion];
-            return toCards("Meteorización",[
-              [enunciado,answer],
-              [pregunta.split("¿")[0].trim()+" ¿Qué tipo de meteorización es? ¿Qué mecanismo actúa?",answer]
-            ]);
-          })
-        ];
-      }),
+      ...mecanismos.flatMap(({tipo,lista,fichas})=>toCards(`Meteorización ${tipo}`,[
+        [`¿Qué tipos de meteorización ${tipo} hay?`,[lista]],
+        ...fichas.map(({pregunta,respuesta})=>[pregunta,respuesta])
+      ])),
+      ...toCards("Meteorización · identifica el mecanismo",[
+        mecanismos[0].fichas[2], mecanismos[1].fichas[1],
+        mecanismos[0].fichas[0], mecanismos[1].fichas[3],
+        mecanismos[0].fichas[3], mecanismos[1].fichas[0],
+        mecanismos[0].fichas[1], mecanismos[1].fichas[2]
+      ].map(({caso,respuesta})=>[caso,respuesta])),
       ...toCards("Meteorización biológica",[
         ["¿Qué tipos de meteorización biológica hay?",[
           "<strong>Por acción mecánica.</strong> Los seres vivos pueden fragmentar la roca.",
@@ -1766,6 +1769,7 @@ function renderSolvedExam(finalStudy = false) {
   const firstInternal = cards.findIndex(card=>card.title.startsWith("Tema 15"));
   const sections = [
     ["Meteorización", "Meteorización ·"],
+    ["Meteorización · casos para identificar", "Meteorización · identifica"],
     ["Formación del suelo", "Formación del suelo"],
     ["Horizontes del suelo", "Horizontes del suelo"],
     ["Propiedades y fertilidad", "Propiedades del suelo"],
