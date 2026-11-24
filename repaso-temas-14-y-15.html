@@ -786,7 +786,9 @@ function speak(area,trigger) {
   trigger.title = "Detener lectura";
   trigger.querySelector("span").textContent = "■";
   const lines = area.querySelectorAll("h1,h2,h3,p,figcaption,legend,.choice,li,.feedback");
-  const chunks = Array.from(lines)
+  const chunks = area.matches(".spoken-model")
+    ? area.innerText.split(/\r\n?|\n/).flatMap(speechSentences)
+    : Array.from(lines)
     .filter(node => node.innerText.trim() && !node.closest("[hidden]") && (!node.closest("details") || node.closest("details").open) && !node.querySelector("p,li"))
     .flatMap(node => {
       const text = node.querySelector(".sort-row span")?.innerText || node.innerText;
@@ -1284,7 +1286,11 @@ function printTopic(title,guide,modules) {
 }
 screen.addEventListener("click",event => {
   const trigger = event.target.closest("button[data-read]");
-  if (trigger) speak(trigger.closest("section"),trigger);
+  if (!trigger) return;
+  const area = trigger.hasAttribute("data-model-read")
+    ? trigger.closest("details").querySelector(".spoken-model")
+    : trigger.closest("section");
+  speak(area,trigger);
 });
 
 let ordering = [3,5,0,4,1,2];
@@ -1837,18 +1843,27 @@ function renderSolvedExam(finalStudy = false) {
     studySection.replaceChildren(...currentSections.map(({label,position})=>new Option(label,String(position))));
   }
   function show(focus=false) {
+    if (activeSpeaker && panel.contains(activeSpeaker)) stopSpeech();
     const visible = visibleCards();
     if (finalStudy) studySection.value = String(currentSections.filter(section=>section.position <= index).at(-1).position);
     const {title,question,image,answer,resource,promptImage} = visible[index];
+    const tableAnswer = Array.isArray(answer) && !answer.length;
     panel.innerHTML = `<section class="block">
       <p class="muted">Pregunta ${index+1} de ${visible.length}</p>
       <h2 tabindex="-1">${title}</h2>
       ${question ? `<p><strong>${question}</strong></p>` : ""}${promptImage ?? (finalStudy ? "" : image ?? "")}${resource || ""}
-      ${finalStudy ? `<details><summary>Ver respuesta modelo</summary>${modelExplanation(answer)}${image ?? ""}</details>` : `<h3>Respuesta modelo</h3>${modelExplanation(answer)}`}
+      ${finalStudy ? `<details><summary>Ver respuesta modelo</summary>
+        ${speaker("Escuchar la respuesta modelo","data-read data-model-read")}
+        <div class="spoken-model">${tableAnswer ? image ?? "" : modelExplanation(answer)}</div>
+        ${tableAnswer ? "" : image ?? ""}</details>` : `<h3>Respuesta modelo</h3>${modelExplanation(answer)}`}
       <div class="actions">
         <button type="button" id="solved-prev" ${index===0?"disabled":""}>Anterior</button>
         <button type="button" id="solved-next" class="primary" ${index===visible.length-1?"disabled":""}>Siguiente</button>
       </div></section>`;
+    const response = panel.querySelector("details");
+    response?.addEventListener("toggle", () => {
+      if (!response.open && activeSpeaker && response.contains(activeSpeaker)) stopSpeech();
+    });
     $("solved-prev").onclick = () => { index--; show(true); };
     $("solved-next").onclick = () => { index++; show(true); };
     if (focus) panel.querySelector("h2").focus();
